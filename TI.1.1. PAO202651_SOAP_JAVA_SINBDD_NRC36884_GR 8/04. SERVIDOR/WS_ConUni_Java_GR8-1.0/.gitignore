@@ -1,0 +1,23 @@
+# NetBeans
+**/nbproject/private/
+**/build/
+**/dist/
+**/nbdist/
+**/nbbuild/
+**/target/
+
+# Archivos de configuración local
+**/.netbeans/
+**/nbproject/private/private.properties
+
+# Java
+*.class
+*.log
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
