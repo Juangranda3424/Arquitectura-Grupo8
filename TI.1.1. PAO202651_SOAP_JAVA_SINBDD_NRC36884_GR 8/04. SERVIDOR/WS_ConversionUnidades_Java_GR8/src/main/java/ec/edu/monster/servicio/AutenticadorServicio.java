@@ -1,0 +1,41 @@
+package ec.edu.monster.servicio;
+
+import ec.edu.monster.modelo.Usuario;
+
+public class AutenticadorServicio {
+
+    private final TokenServicio token = new TokenServicio();
+
+    public String autenticadorLogin(Usuario usuario) {
+
+        if (usuario == null
+                || usuario.getUsername() == null
+                || usuario.getPassword() == null
+                || usuario.getUsername().trim().isEmpty()
+                || usuario.getPassword().isEmpty()) {
+
+            return "Usuario invalido";
+        }
+
+        if ("MONSTER".equals(usuario.getUsername())
+                && "MONSTER9".equals(usuario.getPassword())) {
+
+            return token.generarToken(usuario);
+
+        } else {
+
+            return "Usuario invalido";
+        }
+    }
+    
+    public boolean autenticadorLogout(String tokenUsuario){
+        
+        try {
+            
+            return token.eliminarToken(tokenUsuario);
+        } catch (Exception e) {
+            
+            return false;
+        }
+    }
+}

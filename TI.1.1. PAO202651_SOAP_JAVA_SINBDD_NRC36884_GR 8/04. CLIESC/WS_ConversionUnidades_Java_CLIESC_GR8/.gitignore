@@ -1,0 +1,34 @@
+# ===== NetBeans (Ant) =====
+/build/
+/dist/
+/nbbuild/
+/nbdist/
+/nbproject/private/
+/.nb-gradle/
+
+# ===== Maven =====
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+dependency-reduced-pom.xml
+
+# ===== Compilados y logs =====
+*.class
+*.log
+hs_err_pid*
+
+# ===== Otros IDEs =====
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# ===== Sistema operativo =====
+.DS_Store
+Thumbs.db
+
+# ===== Secretos (descomenta si config.properties tiene claves o contraseñas) =====
+# config.properties
