@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="http://localhost:8080/WS_ConversionUnidades_Java_GR8/WSConversorUnidades?wsdl" uri="xml-resources/web-service-references/WSConversorUnidades/wsdl/localhost_8080/WS_ConversionUnidades_Java_GR8/WSConversorUnidades.wsdl"/>
-    <system systemId="http://localhost:8080/WS_ConversionUnidades_Java_GR8/WSConversorUnidades?xsd=1" uri="xml-resources/web-service-references/WSConversorUnidades/wsdl/localhost_8080/WS_ConversionUnidades_Java_GR8/WSConversorUnidades.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/WS_ConversionUnidades_Java_GR8/WSAutenticador?wsdl" uri="xml-resources/web-service-references/WSAutenticador/wsdl/localhost_8080/WS_ConversionUnidades_Java_GR8/WSAutenticador.wsdl"/>
     <system systemId="http://localhost:8080/WS_ConversionUnidades_Java_GR8/WSAutenticador?xsd=1" uri="xml-resources/web-service-references/WSAutenticador/wsdl/localhost_8080/WS_ConversionUnidades_Java_GR8/WSAutenticador.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/WS_ConversionUnidades_Java_GR8/WSConversorUnidades?wsdl" uri="xml-resources/web-service-references/WSConversorUnidades/wsdl/localhost_8080/WS_ConversionUnidades_Java_GR8/WSConversorUnidades.wsdl"/>
+    <system systemId="http://localhost:8080/WS_ConversionUnidades_Java_GR8/WSConversorUnidades?xsd=1" uri="xml-resources/web-service-references/WSConversorUnidades/wsdl/localhost_8080/WS_ConversionUnidades_Java_GR8/WSConversorUnidades.xsd_1.xsd"/>
 </catalog>

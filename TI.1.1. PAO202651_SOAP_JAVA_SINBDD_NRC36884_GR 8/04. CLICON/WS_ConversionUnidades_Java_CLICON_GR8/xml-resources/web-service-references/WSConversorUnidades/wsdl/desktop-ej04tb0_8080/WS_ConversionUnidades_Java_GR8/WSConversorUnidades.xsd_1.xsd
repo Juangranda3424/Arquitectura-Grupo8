@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by XML-WS Runtime (https://github.com/eclipse-ee4j/metro-jax-ws). Runtime's version is Eclipse Metro/4.0.4.payara-p1 (FISH-10142-Metro-4.0.4-fa01c0b; 2025-07-11T17:44:37+0100) XMLWS-Impl/4.0.3 XMLWS-API/4.0.2 XMLB-Impl/4.0.5 XMLB-API/4.0.2 git-revision#fa01c0b. --><xs:schema xmlns:tns="http://webservicio.monster.edu.ec/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://webservicio.monster.edu.ec/">
+
+<xs:element name="convertir-unidades" type="tns:convertir-unidades"/>
+
+<xs:element name="convertir-unidadesResponse" type="tns:convertir-unidadesResponse"/>
+
+<xs:complexType name="convertir-unidades">
+<xs:sequence>
+<xs:element name="peticionConversion" type="tns:conversionDTO" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="conversionDTO">
+<xs:sequence>
+<xs:element name="tipoMagnitud" type="xs:string" minOccurs="0"/>
+<xs:element name="unidadDestino" type="xs:string" minOccurs="0"/>
+<xs:element name="unidadOrigen" type="xs:string" minOccurs="0"/>
+<xs:element name="valorOrigen" type="xs:double" minOccurs="0"/>
+<xs:element name="valorResultado" type="xs:double" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="convertir-unidadesResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

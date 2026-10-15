@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+        *** GENERATED FROM jax-ws.xml - DO NOT EDIT !                             ***
+        *** TO MODIFY wsimport options USE Web Service node -> Edit WS Attributes ***
+        *** TO CHANGE TARGETS GENERATED TO jaxws-build.xml COPY THOSE             ***
+        *** TARGETS TO ../build.xml AND MODIFY THAT FILE INSTEAD                  ***
+
+        --><project xmlns:xalan="http://xml.apache.org/xslt" xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:jaxws="http://www.netbeans.org/ns/jax-ws/1">
+    <!--
+                ===================
+                JAX-WS WSIMPORT SECTION
+                ===================
+            -->
+    <target name="wsimport-init" depends="init">
+        <mkdir dir="${build.generated.sources.dir}/jax-ws"/>
+        <taskdef name="wsimport" classname="com.sun.tools.ws.ant.WsImport">
+            <classpath path="${libs.jaxws21.classpath}"/>
+        </taskdef>
+    </target>
+    <target name="wsimport-client-WSConversorUnidades" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/WSConversorUnidades"/>
+        <property name="wsdl-WSConversorUnidades" location="xml-resources/web-service-references/WSConversorUnidades/wsdl/desktop-ej04tb0_8080/WS_ConversionUnidades_Java_GR8/WSConversorUnidades.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/WSConversorUnidades" destdir="${build.generated.dir}/jax-wsCache/WSConversorUnidades" wsdl="${wsdl-WSConversorUnidades}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://desktop-ej04tb0:8080/WS_ConversionUnidades_Java_GR8/WSConversorUnidades?wsdl" xnocompile="true" xendorsed="true" package="ec.edu.monster.webservice">
+            <depends file="${wsdl-WSConversorUnidades}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/WSConversorUnidades"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/WSConversorUnidades">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-WSConversorUnidades" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/WSConversorUnidades"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/ec/edu/monster/webservice"/>
+    </target>
+    <target name="wsimport-client-WSAutenticador" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/WSAutenticador"/>
+        <property name="wsdl-WSAutenticador" location="xml-resources/web-service-references/WSAutenticador/wsdl/desktop-ej04tb0_8080/WS_ConversionUnidades_Java_GR8/WSAutenticador.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/WSAutenticador" destdir="${build.generated.dir}/jax-wsCache/WSAutenticador" wsdl="${wsdl-WSAutenticador}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://desktop-ej04tb0:8080/WS_ConversionUnidades_Java_GR8/WSAutenticador?wsdl" xnocompile="true" xendorsed="true" package="ec.edu.monster.webservice">
+            <depends file="${wsdl-WSAutenticador}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/WSAutenticador"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/WSAutenticador">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-WSAutenticador" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/WSAutenticador"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/ec/edu/monster/webservice"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-WSConversorUnidades, wsimport-client-WSAutenticador"/>
+</project>

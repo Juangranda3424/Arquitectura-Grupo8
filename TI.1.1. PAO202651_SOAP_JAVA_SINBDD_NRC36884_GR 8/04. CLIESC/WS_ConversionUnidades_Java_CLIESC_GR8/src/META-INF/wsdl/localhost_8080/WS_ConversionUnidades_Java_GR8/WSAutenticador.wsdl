@@ -4,31 +4,31 @@
 <xsd:import namespace="http://webservicio.monster.edu.ec/" schemaLocation="http://localhost:8080/WS_ConversionUnidades_Java_GR8/WSAutenticador?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="logout">
-<part name="parameters" element="tns:logout"/>
-</message>
-<message name="logoutResponse">
-<part name="parameters" element="tns:logoutResponse"/>
-</message>
 <message name="login">
 <part name="parameters" element="tns:login"/>
 </message>
 <message name="loginResponse">
 <part name="parameters" element="tns:loginResponse"/>
 </message>
+<message name="logout">
+<part name="parameters" element="tns:logout"/>
+</message>
+<message name="logoutResponse">
+<part name="parameters" element="tns:logoutResponse"/>
+</message>
 <portType name="WSAutenticador">
-<operation name="logout">
-<input wsam:Action="http://webservicio.monster.edu.ec/WSAutenticador/logoutRequest" message="tns:logout"/>
-<output wsam:Action="http://webservicio.monster.edu.ec/WSAutenticador/logoutResponse" message="tns:logoutResponse"/>
-</operation>
 <operation name="login">
 <input wsam:Action="http://webservicio.monster.edu.ec/WSAutenticador/loginRequest" message="tns:login"/>
 <output wsam:Action="http://webservicio.monster.edu.ec/WSAutenticador/loginResponse" message="tns:loginResponse"/>
 </operation>
+<operation name="logout">
+<input wsam:Action="http://webservicio.monster.edu.ec/WSAutenticador/logoutRequest" message="tns:logout"/>
+<output wsam:Action="http://webservicio.monster.edu.ec/WSAutenticador/logoutResponse" message="tns:logoutResponse"/>
+</operation>
 </portType>
 <binding name="WSAutenticadorPortBinding" type="tns:WSAutenticador">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="logout">
+<operation name="login">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -37,7 +37,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="login">
+<operation name="logout">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
