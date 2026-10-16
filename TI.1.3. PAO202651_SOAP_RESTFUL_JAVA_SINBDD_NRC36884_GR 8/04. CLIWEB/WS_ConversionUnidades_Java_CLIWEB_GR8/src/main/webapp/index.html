@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Conversor de unidades</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+<header class="barra">
+    <h1 class="barra__titulo">Conversor de unidades</h1>
+    <div class="sesion" id="sesion" hidden>
+        <span class="sesion__usuario" id="sesionUsuario"></span>
+        <button type="button" class="boton boton--texto" id="btnSalir">Cerrar sesión</button>
+    </div>
+</header>
+
+<main class="contenedor">
+
+    <!-- ============ Inicio de sesión ============ -->
+    <section class="panel" id="vistaLogin" aria-labelledby="tituloLogin" hidden>
+        <div class="regla" aria-hidden="true"></div>
+        <div class="panel__cuerpo">
+            <h2 id="tituloLogin">Inicia sesión</h2>
+            <p class="ayuda">Necesitas una cuenta para usar el servicio de conversión.</p>
+
+            <form id="formLogin" novalidate>
+                <div class="campo">
+                    <label for="usuario">Usuario</label>
+                    <input id="usuario" name="usuario" type="text" autocomplete="username" autocapitalize="off" required>
+                </div>
+                <div class="campo">
+                    <label for="contrasena">Contraseña</label>
+                    <input id="contrasena" name="contrasena" type="password" autocomplete="current-password" required>
+                </div>
+                <p class="mensaje mensaje--error" id="errorLogin" role="alert" hidden></p>
+                <button type="submit" class="boton boton--primario" id="btnEntrar">Iniciar sesión</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ============ Conversor ============ -->
+    <section class="panel" id="vistaConversor" aria-labelledby="tituloConversor" hidden>
+        <div class="regla" aria-hidden="true"></div>
+        <div class="panel__cuerpo">
+            <h2 id="tituloConversor" class="visible-lector">Convertir</h2>
+
+            <div class="magnitudes" role="radiogroup" aria-label="Magnitud">
+                <label class="magnitud">
+                    <input type="radio" name="magnitud" value="LONGITUD" checked>
+                    <span>Longitud</span>
+                </label>
+                <label class="magnitud">
+                    <input type="radio" name="magnitud" value="MASA">
+                    <span>Masa</span>
+                </label>
+                <label class="magnitud">
+                    <input type="radio" name="magnitud" value="TEMPERATURA">
+                    <span>Temperatura</span>
+                </label>
+            </div>
+
+            <form id="formConversion" novalidate>
+                <div class="campo">
+                    <label for="valor">Valor</label>
+                    <input id="valor" name="valor" type="text" inputmode="decimal" autocomplete="off" required>
+                </div>
+
+                <div class="par">
+                    <div class="campo">
+                        <label for="unidadOrigen">De</label>
+                        <select id="unidadOrigen" name="unidadOrigen"></select>
+                    </div>
+                    <button type="button" class="boton boton--icono" id="btnIntercambiar"
+                            aria-label="Intercambiar unidades" title="Intercambiar unidades">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M7 4 3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"/>
+                        </svg>
+                    </button>
+                    <div class="campo">
+                        <label for="unidadDestino">A</label>
+                        <select id="unidadDestino" name="unidadDestino"></select>
+                    </div>
+                </div>
+
+                <p class="mensaje mensaje--error" id="errorConversion" role="alert" hidden></p>
+                <button type="submit" class="boton boton--primario" id="btnConvertir">Convertir</button>
+            </form>
+
+            <div class="resultado" id="resultado" aria-live="polite">
+                <p class="resultado__vacio" id="resultadoVacio">El resultado aparece aquí.</p>
+                <div id="resultadoDatos" hidden>
+                    <p class="resultado__numero"><span id="resNumero"></span> <span class="resultado__unidad" id="resUnidad"></span></p>
+                    <p class="resultado__detalle" id="resDetalle"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="historial" id="historialBloque" aria-labelledby="tituloHistorial" hidden>
+        <h2 id="tituloHistorial">Últimas conversiones</h2>
+        <ul id="historial"></ul>
+    </section>
+
+</main>
+
+<script src="js/app.js"></script>
+</body>
+</html>
