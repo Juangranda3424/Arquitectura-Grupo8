@@ -1,10 +1,138 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>WS_ConversionUnidades_Java_GR8 · API REST</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            :root {
+                color-scheme: light;
+                --tinta: #14213d;
+                --acento: #1d4ed8;
+                --borde: #d7dce5;
+                --fondo-suave: #f4f6fa;
+            }
+            body {
+                font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                color: var(--tinta);
+                margin: 0 auto;
+                max-width: 62rem;
+                padding: 2.5rem 1.5rem 4rem;
+                line-height: 1.55;
+            }
+            h1 { margin-bottom: .25rem; font-size: 1.9rem; }
+            h2 { margin-top: 2.25rem; font-size: 1.25rem; border-bottom: 1px solid var(--borde); padding-bottom: .35rem; }
+            .subtitulo { color: #55627c; margin-top: 0; }
+            code {
+                background: var(--fondo-suave);
+                border: 1px solid var(--borde);
+                border-radius: 4px;
+                padding: .1rem .35rem;
+                font-size: .92em;
+            }
+            pre {
+                background: var(--fondo-suave);
+                border: 1px solid var(--borde);
+                border-radius: 6px;
+                padding: .85rem 1rem;
+                overflow-x: auto;
+            }
+            pre code { background: none; border: 0; padding: 0; }
+            table { border-collapse: collapse; width: 100%; margin-top: .5rem; }
+            th, td { border: 1px solid var(--borde); padding: .5rem .6rem; text-align: left; vertical-align: top; }
+            th { background: var(--fondo-suave); }
+            td code { white-space: nowrap; }
+            .aviso { color: #8a4b00; font-weight: 600; }
+            footer { margin-top: 3rem; color: #55627c; font-size: .9rem; }
+        </style>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>WS_ConversionUnidades_Java_GR8</h1>
+        <p class="subtitulo">
+            Servicio REST de conversión de unidades (longitud, masa y temperatura) — TI.1.3,
+            arquitectura SOAP/RESTful Java sin base de datos.
+        </p>
+
+        <h2>URL base</h2>
+        <p><code>http://&lt;host&gt;:8080/WS_ConversionUnidades_Java_GR8/api</code></p>
+        <p>Ejemplo de sonda pública: <code>GET /api/estado</code>.</p>
+
+        <h2>Endpoints</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Método y ruta</th>
+                    <th>Token</th>
+                    <th>Cuerpo de entrada</th>
+                    <th><code>resultado</code> (200)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>GET /api/estado</code></td>
+                    <td>no</td>
+                    <td>—</td>
+                    <td><code>{servicio, version, protocolo, horaServidor}</code></td>
+                </tr>
+                <tr>
+                    <td><code>POST /api/auth/login</code></td>
+                    <td>no</td>
+                    <td><code>{"username","password"}</code></td>
+                    <td><code>{token, usuario, expiraEn}</code></td>
+                </tr>
+                <tr>
+                    <td><code>POST /api/auth/logout</code></td>
+                    <td>sí</td>
+                    <td>—</td>
+                    <td><code>true</code></td>
+                </tr>
+                <tr>
+                    <td><code>GET /api/catalogo</code></td>
+                    <td>sí</td>
+                    <td>—</td>
+                    <td><code>{LONGITUD:[…], MASA:[…], TEMPERATURA:[…]}</code></td>
+                </tr>
+                <tr>
+                    <td><code>POST /api/conversiones/{longitud|masa|temperatura}</code></td>
+                    <td>sí</td>
+                    <td><code>{"valorOrigen","unidadOrigen","unidadDestino"}</code></td>
+                    <td><code>{valorOrigen, valorResultado, unidadOrigen, unidadDestino, tipoMagnitud}</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Envelope de respuesta</h2>
+        <p>Éxitos y errores comparten siempre la misma forma, con las cuatro claves presentes:</p>
+        <pre><code>{ "estado": "OK|ERROR", "codigo": 200, "mensaje": "texto", "resultado": { } }</code></pre>
+        <p>
+            En los errores <code>resultado</code> es <code>null</code> y <code>codigo</code> repite el
+            código HTTP. Códigos usados: <code>400</code> datos inválidos, <code>401</code> sesión,
+            <code>404</code> ruta o magnitud desconocida, <code>405</code> método incorrecto,
+            <code>415</code> cuerpo que no es JSON y <code>500</code> error inesperado.
+        </p>
+
+        <h2>Autenticación</h2>
+        <p>
+            <code>POST /api/auth/login</code> devuelve un token de sesión vigente 30 minutos. Envíelo en
+            las peticiones protegidas en el encabezado:
+        </p>
+        <pre><code>Authorization: Bearer &lt;token&gt;</code></pre>
+        <p>
+            El esquema <code>Bearer</code> no distingue mayúsculas; sin encabezado o con un token
+            desconocido o vencido la respuesta es <code>401</code> con el mensaje de acceso denegado.
+        </p>
+        <p>
+            Credenciales de prueba: usuario <code>MONSTER</code>, contraseña <code>MONSTER9</code>.
+            Son credenciales en memoria (proyecto SINBDD): no modifique el servicio para cambiarlas.
+        </p>
+        <p class="aviso">Las peticiones POST deben declarar <code>Content-Type: application/json</code>.</p>
+
+        <h2>Ejemplo</h2>
+        <pre><code>curl -X POST http://localhost:8080/WS_ConversionUnidades_Java_GR8/api/conversiones/longitud \
+     -H "Content-Type: application/json" \
+     -H "Authorization: Bearer &lt;token&gt;" \
+     -d '{"valorOrigen":100,"unidadOrigen":"CENTIMETRO","unidadDestino":"METRO"}'</code></pre>
+
+        <footer>PAO202651 · NRC36884 · Grupo 8 · Servidor REST/JAX-RS (Jakarta EE 11).</footer>
     </body>
 </html>

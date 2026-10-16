@@ -26,6 +26,17 @@
             <version>1.1.7</version>
             <scope>test</scope>
         </dependency>
+        <!--
+            Solo para pruebas: aporta la implementación de RuntimeDelegate con la que se
+            construyen las respuestas JAX-RS (Response) sin contenedor. En tiempo de ejecución
+            el RuntimeDelegate lo provee el servidor de aplicaciones.
+        -->
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-common</artifactId>
+            <version>3.1.5</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
