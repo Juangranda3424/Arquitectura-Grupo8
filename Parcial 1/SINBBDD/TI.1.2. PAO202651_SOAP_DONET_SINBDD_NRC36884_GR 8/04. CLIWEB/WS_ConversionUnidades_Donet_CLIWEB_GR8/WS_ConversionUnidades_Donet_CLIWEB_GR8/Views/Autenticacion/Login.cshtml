@@ -1,0 +1,26 @@
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Iniciar sesión";
+}
+
+<section class="tarjeta tarjeta-angosta">
+    <h1>Iniciar sesión</h1>
+    <p class="sub">Ingresa con tus credenciales del servicio web.</p>
+
+    @if (!string.IsNullOrEmpty(Model.Error))
+    {
+        <div class="alerta alerta-error">@Model.Error</div>
+    }
+
+    <form asp-action="Login" method="post">
+        <label asp-for="Usuario">Usuario</label>
+        <input asp-for="Usuario" autocomplete="username" autofocus />
+        <span asp-validation-for="Usuario" class="error-campo"></span>
+
+        <label asp-for="Contrasena">Contraseña</label>
+        <input asp-for="Contrasena" type="password" autocomplete="current-password" />
+        <span asp-validation-for="Contrasena" class="error-campo"></span>
+
+        <button type="submit" class="btn">Ingresar</button>
+    </form>
+</section>

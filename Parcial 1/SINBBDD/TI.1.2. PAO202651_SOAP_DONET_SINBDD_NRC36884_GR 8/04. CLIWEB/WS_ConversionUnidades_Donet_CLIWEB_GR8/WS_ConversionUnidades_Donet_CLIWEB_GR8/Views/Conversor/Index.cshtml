@@ -1,0 +1,89 @@
+@model ConversionViewModel
+@{
+    ViewData["Title"] = "Conversor";
+    ViewData["Usuario"] = Model.Usuario;
+    var unidades = UnidadesCatalogo.Todas[
+        UnidadesCatalogo.Todas.ContainsKey(Model.TipoMagnitud) ? Model.TipoMagnitud : "LONGITUD"];
+}
+
+<section class="tarjeta">
+    <h1>Conversor de unidades</h1>
+    <p class="sub">Longitud, masa y temperatura mediante el servicio SOAP.</p>
+
+    @if (!string.IsNullOrEmpty(Model.Error))
+    {
+        <div class="alerta alerta-error">@Model.Error</div>
+    }
+
+    <form asp-action="Index" method="post" id="formConversion">
+        <label for="TipoMagnitud">Magnitud</label>
+        <select id="TipoMagnitud" name="TipoMagnitud">
+            @foreach (var m in UnidadesCatalogo.Magnitudes)
+            {
+                <option value="@m.Key" selected="@(m.Key == Model.TipoMagnitud)">@m.Value</option>
+            }
+        </select>
+
+        <label asp-for="ValorOrigen">Valor</label>
+        <input asp-for="ValorOrigen" type="number" step="any" placeholder="Ej: 100" />
+        <span asp-validation-for="ValorOrigen" class="error-campo"></span>
+
+        <div class="fila">
+            <div>
+                <label for="UnidadOrigen">De</label>
+                <select id="UnidadOrigen" name="UnidadOrigen">
+                    @foreach (var u in unidades)
+                    {
+                        <option value="@u.Valor" selected="@(u.Valor == Model.UnidadOrigen)">@u.Etiqueta</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <label for="UnidadDestino">A</label>
+                <select id="UnidadDestino" name="UnidadDestino">
+                    @foreach (var u in unidades)
+                    {
+                        <option value="@u.Valor" selected="@(u.Valor == Model.UnidadDestino)">@u.Etiqueta</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="btn">Convertir</button>
+    </form>
+
+    @if (Model.Resultado.HasValue)
+    {
+        <div class="resultado">
+            <span class="resultado-detalle">
+                @(Model.ValorOrigen?.ToString("0.##########")) @Model.UnidadOrigen.ToLowerInvariant() =
+            </span>
+            <strong>@Model.Resultado.Value.ToString("0.##########") @Model.UnidadDestino.ToLowerInvariant()</strong>
+        </div>
+    }
+</section>
+
+<script>
+    // Al cambiar la magnitud se recargan las unidades de origen y destino
+    const catalogo = @Json.Serialize(UnidadesCatalogo.Todas);
+    const magnitud = document.getElementById('TipoMagnitud');
+    const origen = document.getElementById('UnidadOrigen');
+    const destino = document.getElementById('UnidadDestino');
+
+    function llenar(select, unidades, indiceSeleccionado) {
+        select.innerHTML = '';
+        unidades.forEach((u, i) => {
+            const op = document.createElement('option');
+            op.value = u.valor;
+            op.textContent = u.etiqueta;
+            if (i === indiceSeleccionado) op.selected = true;
+            select.appendChild(op);
+        });
+    }
+
+    magnitud.addEventListener('change', () => {
+        const unidades = catalogo[magnitud.value];
+        llenar(origen, unidades, 0);
+        llenar(destino, unidades, 1);
+    });
+</script>

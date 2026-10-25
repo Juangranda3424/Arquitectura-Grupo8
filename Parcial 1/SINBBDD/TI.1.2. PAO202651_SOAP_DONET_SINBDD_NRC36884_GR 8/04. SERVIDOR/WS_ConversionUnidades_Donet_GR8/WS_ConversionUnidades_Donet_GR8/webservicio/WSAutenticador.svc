@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="WS_ConversionUnidades_Donet_GR8.webservicio.WSAutenticador" CodeBehind="WSAutenticador.svc.cs" %>

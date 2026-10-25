@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "WS_ConversionUnidades_Donet_CLIESC_GR8/1.0.0": {
+        "runtime": {
+          "WS_ConversionUnidades_Donet_CLIESC_GR8.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WS_ConversionUnidades_Donet_CLIESC_GR8/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
