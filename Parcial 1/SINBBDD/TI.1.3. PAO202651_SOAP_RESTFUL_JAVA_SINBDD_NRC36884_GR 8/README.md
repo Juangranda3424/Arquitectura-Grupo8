@@ -69,19 +69,44 @@ Reglas:
 
 ## Servidor
 
-Requisitos: JDK 17+ (probado con 27), Maven 3.9+, Payara 7 (Jakarta EE 11).
+Requisitos: JDK 17+ para compilar (el WAR apunta a Java 17), JDK 21 para correr el
+servidor (Payara 7 corre sobre Java SE 21), Maven 3.9+.
 
 ```bash
 cd "04. SERVIDOR/WS_ConversionUnidades_Java_GR8"
-mvn clean package          # genera target/WS_ConversionUnidades_Java_GR8.war
+mvn clean package     # compila, corre las 127 pruebas y empaqueta el WAR
+mvn -Prun package     # además arranca el servidor en http://localhost:8080
+mvn -Prun exec:exec   # arranca sin recompilar (usa el WAR ya empaquetado)
 ```
 
-Despliegue en Payara Server (`asadmin deploy target/WS_ConversionUnidades_Java_GR8.war`
-o NetBeans ▸ Run) o, para una prueba rápida sin instalar nada:
+El perfil `run` del `pom.xml` baja **Payara Micro 7.2026.10** (Jakarta EE 11) desde
+Maven Central a `target/payara-micro-7.2026.10.jar` la primera vez, y lo levanta con
+el WAR. Es opt-in: el build normal nunca arranca servidores.
 
-```bash
-java -jar payara-micro.jar --port 8080 --noCluster --deploy target/WS_ConversionUnidades_Java_GR8.war
-```
+### Arrancar desde NetBeans
+
+1. En la barra de herramientas elegí la configuración **`run`** (el combo de al
+   lado de los botones; si no aparece, `Reload Project`)
+2. Apretá **Run** (▶)
+3. Esperá en Output: `Payara Micro 7.2026.10 (build 18) ready in ...`
+4. Abrí <http://localhost:8080/WS_ConversionUnidades_Java_GR8/api/estado>
+
+El botón Run de NetBeans ejecuta `package`, y el arranque del servidor cuelga
+justamente de esa fase — por eso funciona. Si alguna prueba falla, el servidor no
+arranca. El proceso queda bloqueado mientras el servidor vive: el botón de stop del
+IDE (o `Ctrl+C` en consola) lo detiene, y eso cierra el build con
+`Process exited with an error` (*la parada del proceso, no un fallo de compilación*).
+
+Payara abre el puerto unos segundos antes de terminar de desplegar: si abrís el
+navegador demasiado pronto vas a ver un `404`. Esperá la línea `Deployed 1 archive`
+/ `ready in` en Output y ahí sí consultá.
+
+- Otro puerto: `mvn -Prun package -Dpayara.micro.port=9090`
+- Runtime y logs del servidor: `target/payara-micro/`
+- Versión de Payara Micro: propiedad `payara.micro.version`
+
+Para desplegar en un Payara Server completo ya instalado sigue valiendo
+`asadmin deploy target/WS_ConversionUnidades_Java_GR8.war`.
 
 Prueba rápida:
 

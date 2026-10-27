@@ -68,4 +68,86 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <!--
+            Arranque local con Payara Micro (Jakarta EE 11). Opt-in: no afecta al build normal.
+
+                mvn -Prun package     compila, corre las 127 pruebas y arranca el servidor
+                mvn -Prun exec:exec   arranca sin recompilar, usando el WAR ya empaquetado
+
+            El arranque cuelga de la fase `package` a proposito: el boton Run de NetBeans
+            ejecuta `package`, asi que con la configuracion `run` elegida en la barra el
+            servidor levanta solo. Si los tests fallan, el servidor no arranca.
+
+            Payara Micro se descarga la primera vez desde Maven Central a target/;
+            usa el `java` del PATH, que debe ser JDK 21 (Payara 7 corre sobre Java SE 21).
+        -->
+        <profile>
+            <id>run</id>
+            <properties>
+                <payara.micro.version>7.2026.10</payara.micro.version>
+                <payara.micro.port>8080</payara.micro.port>
+                <payara.micro.jar>${project.build.directory}/payara-micro-${payara.micro.version}.jar</payara.micro.jar>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>3.8.1</version>
+                        <executions>
+                            <execution>
+                                <id>copiar-payara-micro</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>fish.payara.extras</groupId>
+                                            <artifactId>payara-micro</artifactId>
+                                            <version>${payara.micro.version}</version>
+                                            <type>jar</type>
+                                            <outputDirectory>${project.build.directory}</outputDirectory>
+                                            <destFileName>payara-micro-${payara.micro.version}.jar</destFileName>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.5.0</version>
+                        <configuration>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-jar</argument>
+                                <argument>${payara.micro.jar}</argument>
+                                <argument>--port</argument>
+                                <argument>${payara.micro.port}</argument>
+                                <argument>--noCluster</argument>
+                                <argument>--rootDir</argument>
+                                <argument>${project.build.directory}/payara-micro</argument>
+                                <argument>--deploy</argument>
+                                <argument>${project.build.directory}/${project.build.finalName}.war</argument>
+                            </arguments>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>arrancar-payara-micro</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
