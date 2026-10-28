@@ -153,9 +153,11 @@ Misma estructura que CLICON con ventanas `Login` y `ConversorVista`
 WAR puente (el navegador nunca ve el token: queda en la `HttpSession` del servlet):
 ```bash
 cd "04. CLIWEB/WS_ConversionUnidades_Java_CLIWEB_GR8"
-mvn clean package    # despliega target/WS_ConversionUnidades_Java_CLIWEB_GR8.war
+mvn -Prun package    # arranca el cliente en Payara Micro, puerto 8081
 ```
-Abrir `http://localhost:8080/WS_ConversionUnidades_Java_CLIWEB_GR8/`.
+Con el servidor REST ya corriendo en 8080, abrir
+`http://localhost:8081/WS_ConversionUnidades_Java_CLIWEB_GR8/`.
+En NetBeans: configuración **`run`** + **Run**, igual que el servidor.
 Config: `src/main/resources/.env` (plantilla sin secretos, claves de la tabla anterior).
 Detalle completo en el `README.md` del propio proyecto.
 

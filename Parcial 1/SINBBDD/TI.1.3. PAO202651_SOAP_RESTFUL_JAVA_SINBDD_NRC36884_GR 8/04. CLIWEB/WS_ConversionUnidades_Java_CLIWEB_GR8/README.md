@@ -13,19 +13,27 @@ El token **nunca llega al navegador**: queda en la `HttpSession` del servidor (a
 `ws.token`/`ws.usuario`).
 
 ## Requisitos
-- JDK 17 o superior (Payara 7 corre con JDK 21)
-- Maven 3.9+
-- Payara 7 con el **servidor REST ya desplegado** (`WS_ConversionUnidades_Java_GR8.war`)
+- JDK 21 en el `PATH` (Payara 7 corre sobre Java SE 21)
+- Maven 3.9+ (sirve el que trae NetBeans)
+- El **servidor REST corriendo** en `http://localhost:8080` (perfil `run` de
+  `04. SERVIDOR/WS_ConversionUnidades_Java_GR8`)
 
-## Compilar y desplegar
+## Arrancar con Payara Micro (sin instalar Payara)
 ```bash
-mvn clean package
+mvn -Prun package     # compila y arranca el cliente en http://localhost:8081
+mvn -Prun exec:exec   # arranca sin recompilar (usa el WAR ya empaquetado)
 ```
-Despliega `target/WS_ConversionUnidades_Java_CLIWEB_GR8.war` en Payara
-(NetBeans: *Run*, o consola de administración en `http://localhost:4848`, o
-`asadmin deploy target/WS_ConversionUnidades_Java_CLIWEB_GR8.war`).
+El perfil `run` baja **Payara Micro 7.2026.10** a `target/` la primera vez y lo levanta
+con el WAR en el puerto **8081**, para convivir con el servidor REST en 8080.
 
-Abre: **http://localhost:8080/WS_ConversionUnidades_Java_CLIWEB_GR8/**
+NetBeans: elegí la configuración **`run`** en la barra de herramientas y apretá **Run** (▶).
+Esperá en Output `Payara Micro 7.2026.10 (build 18) ready in ...`.
+
+Abre: **http://localhost:8081/WS_ConversionUnidades_Java_CLIWEB_GR8/**
+
+- Otro puerto: `mvn -Prun package -Dpayara.micro.port=9091`
+- Payara Server completo: `mvn clean package` y
+  `asadmin deploy target/WS_ConversionUnidades_Java_CLIWEB_GR8.war`.
 
 Credenciales del servidor: `MONSTER` / `MONSTER9`.
 
