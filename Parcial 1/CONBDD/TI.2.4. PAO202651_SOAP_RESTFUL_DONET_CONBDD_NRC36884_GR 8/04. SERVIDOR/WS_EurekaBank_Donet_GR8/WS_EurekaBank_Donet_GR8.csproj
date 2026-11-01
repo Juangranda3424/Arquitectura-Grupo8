@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
+    <!-- Runs on .NET 8, or on a newer runtime (e.g. .NET 10) when .NET 8 is not installed. -->
+    <RollForward>Major</RollForward>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>WS_EurekaBank_Donet_GR8</RootNamespace>
