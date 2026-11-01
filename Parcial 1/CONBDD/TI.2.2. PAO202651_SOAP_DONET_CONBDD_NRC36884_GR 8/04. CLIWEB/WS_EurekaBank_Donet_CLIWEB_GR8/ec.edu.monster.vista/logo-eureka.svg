@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img"
+    aria-label="Logotipo EurekaBank Grupo 8">
+    <rect x="2" y="2" width="60" height="60" rx="14" fill="#13315C" stroke="#0FA3B1" stroke-width="2.5" />
+    <path d="M20 18h24v7H28v6h14v6H28v6h17v7H20z" fill="#FFFFFF" />
+    <rect x="14" y="50" width="36" height="4" rx="2" fill="#F2A541" />
+</svg>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logotipo vectorial: monograma "E" en un cuadrado navy redondeado con acento ambar -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <path
+        android:fillColor="@color/primary2_navy"
+        android:pathData="M16,2h32a14,14 0 0 1 14,14v32a14,14 0 0 1 -14,14h-32a14,14 0 0 1 -14,-14v-32a14,14 0 0 1 14,-14z"
+        android:strokeWidth="2.5"
+        android:strokeColor="@color/accent_teal" />
+    <path
+        android:fillColor="@color/white"
+        android:pathData="M20,18h24v7H28v6h14v6H28v6h17v7H20z" />
+    <path
+        android:fillColor="@color/accent_amber"
+        android:pathData="M16,50h32a2,2 0 0 1 0,4h-32a2,2 0 0 1 0,-4z" />
+</vector>

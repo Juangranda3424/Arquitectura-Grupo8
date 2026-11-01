@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">WS_EurekaBank_Donet_CLIMOV_GR8</string>
+    <string name="marca">EurekaBank</string>
+    <string name="subtitulo">Grupo 8 · Arquitectura de Software</string>
+    <string name="titulo_login">Iniciar sesión</string>
+    <string name="usuario">Usuario</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="ingresar">INGRESAR</string>
+    <string name="validando">Validando credenciales...</string>
+    <string name="login_fallido">Usuario o contraseña incorrectos.</string>
+    <string name="login_error">No se pudo contactar al servidor SOAP.</string>
+    <string name="bienvenido">Bienvenido a EurekaBank</string>
+    <string name="titulo_menu">Menú principal</string>
+    <string name="registrar_movimiento">Registrar movimiento</string>
+    <string name="consultar_movimientos">Consultar movimientos</string>
+    <string name="titulo_deposito">Realizar movimiento</string>
+    <string name="numero_cuenta">Número de cuenta</string>
+    <string name="monto">Monto</string>
+    <string name="cuenta_destino">Cuenta destino (transferencia)</string>
+    <string name="realizar_movimiento">Registrar movimiento</string>
+    <string name="consultando">Consultando movimientos...</string>
+    <string name="buscar">BUSCAR</string>
+    <string name="sin_movimientos">No se encontraron movimientos para la cuenta indicada.</string>
+    <string name="movimiento_ok">Movimiento registrado con éxito.</string>
+    <string name="movimiento_error">El servidor rechazó el movimiento.</string>
+
+    <string-array name="tipo_movimiento">
+        <item>Deposito</item>
+        <item>Retiro</item>
+        <item>Transferencia</item>
+    </string-array>
+</resources>
