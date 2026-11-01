@@ -1,0 +1,14 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Tema base de la aplicación (identidad EurekaBank · GR8). -->
+    <style name="Base.Theme.EurekaBank_GR8" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/teal</item>
+        <item name="colorSecondary">@color/amber</item>
+        <item name="colorSurface">@color/superficie</item>
+        <item name="android:colorBackground">@color/fondo</item>
+        <item name="android:statusBarColor">@color/navy</item>
+        <item name="android:navigationBarColor">@color/navy</item>
+        <item name="android:windowBackground">@color/fondo</item>
+    </style>
+
+    <style name="Theme.EurekaBank_GR8" parent="Base.Theme.EurekaBank_GR8" />
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Descriptor de endpoints de JAX-WS RI (Metro).
+
+    Solo se empaqueta con el perfil `run`: Payara Micro no trae runtime JAX-WS, y el RI
+    lo lee (su ServletContainerInitializer lo detecta en /WEB-INF/sun-jaxws.xml) para
+    publicar cada servicio en la misma URL que usa un Payara Server / GlassFish completo.
+-->
+<endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime" version="2.0">
+    <endpoint name="WSLogin"
+              implementation="ec.edu.monster.ws.WSLogin"
+              url-pattern="/WSLogin"/>
+    <endpoint name="WSCuenta"
+              implementation="ec.edu.monster.ws.WSCuenta"
+              url-pattern="/WSCuenta"/>
+    <endpoint name="WSMovimiento"
+              implementation="ec.edu.monster.ws.WSMovimiento"
+              url-pattern="/WSMovimiento"/>
+</endpoints>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- =====================================================================
+         Identidad EurekaBank · Grupo 8
+         navy #0B1F3A / #13315C · teal #0FA3B1 · ámbar #F2A541
+         fondo #F4F6FA · superficie #FFFFFF · texto #1E293B · suave #64748B
+         éxito #16A34A · error #DC2626 · borde #E2E8F0
+         ================================================================== -->
+    <color name="gr8_navy">#0B1F3A</color>
+    <color name="gr8_navy_2">#13315C</color>
+    <color name="gr8_teal">#0FA3B1</color>
+    <color name="gr8_teal_dark">#0B848F</color>
+    <color name="gr8_amber">#F2A541</color>
+    <color name="gr8_bg">#F4F6FA</color>
+    <color name="gr8_surface">#FFFFFF</color>
+    <color name="gr8_text">#1E293B</color>
+    <color name="gr8_muted">#64748B</color>
+    <color name="gr8_success">#16A34A</color>
+    <color name="gr8_error">#DC2626</color>
+    <color name="gr8_border">#E2E8F0</color>
+    <color name="gr8_success_bg">#E7F7EC</color>
+    <color name="gr8_error_bg">#FDE8E8</color>
+
+    <!-- Colores heredados del proyecto (se mantienen por compatibilidad) -->
+    <color name="primary_green">#329164</color>
+    <color name="primary_green_light">#6f95c4</color>
+    <color name="accent_green">#7bb43c</color>
+    <color name="accent_green_dark">#3c6098</color>
+    <color name="dark_green">#2b6324</color>
+    <color name="light_green">#8bc6a1</color>
+    <color name="bright_green">#c3e05b</color>
+    <color name="purple">#8a86a3</color>
+    <color name="navy_blue">#215e84</color>
+    <color name="charcoal">#070808</color>
+    <color name="violet">#6c5494</color>
+    <color name="teal">#0b3f3d</color>
+    <color name="lime">#6da440</color>
+    <color name="sky_blue">#b2c7db</color>
+    <color name="cyan">#91c6e1</color>
+    <color name="sage">#bbc6a6</color>
+    <color name="blue">#05abda</color>
+    <color name="midnight">#142351</color>
+    <color name="deep_blue">#104367</color>
+    <color name="lavender">#ada4bc</color>
+    <color name="dark_gray">#363f4b</color>
+    <color name="sea_green">#055b4b</color>
+    <color name="teal_dark">#0e6764</color>
+    <color name="mint">#dde7ce</color>
+    <color name="light_cyan">#d5e7eb</color>
+    <color name="ocean">#538dad</color>
+    <color name="forest">#16A34A</color>
+    <color name="light_gray">#cccad2</color>
+    <color name="grass">#8aba5b</color>
+    <color name="off_white">#fcfbfb</color>
+    <color name="orchid">#947cbc</color>
+    <color name="pale_green">#F4F6FA</color>
+    <color name="ice">#f4f9f8</color>
+    <color name="turquoise">#44b4cc</color>
+    <color name="cloud">#ecf5f5</color>
+    <color name="olive">#34542c</color>
+    <color name="baby_blue">#e4f5f8</color>
+    <color name="lilac">#e4dcee</color>
+    <color name="ivory">#f8fbec</color>
+
+    <!-- Colores de la UI: identidad EurekaBank · GR8 -->
+    <color name="primary">@color/gr8_teal</color>
+    <color name="primary_dark">@color/gr8_navy_2</color>
+    <color name="primary_light">@color/gr8_navy_2</color>
+    <color name="accent">@color/gr8_amber</color>
+    <color name="background">@color/gr8_bg</color>
+    <color name="card_background">@color/gr8_surface</color>
+    <color name="text_primary">@color/gr8_text</color>
+    <color name="text_secondary">@color/gr8_muted</color>
+    <color name="input_text">@color/gr8_text</color>
+    <color name="error">@color/gr8_error</color>
+    <color name="success">@color/gr8_success</color>
+
+    <!-- Botones planos teal -->
+    <color name="gradient_start">@color/gr8_teal</color>
+    <color name="gradient_end">@color/gr8_teal_dark</color>
+    <color name="logout_gradient_start">@color/gr8_navy_2</color>
+    <color name="logout_gradient_end">@color/gr8_navy</color>
+
+    <!-- Campos de formulario -->
+    <color name="input_border">@color/gr8_border</color>
+    <color name="input_focus">@color/gr8_teal</color>
+    <color name="input_hint">@color/gr8_muted</color>
+    <color name="input_hint_dark">@color/gr8_text</color>
+    <color name="alert_danger_bg">@color/gr8_error_bg</color>
+    <color name="alert_success_bg">@color/gr8_success_bg</color>
+</resources>

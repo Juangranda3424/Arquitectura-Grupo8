@@ -1,0 +1,15 @@
+@model MenuViewModel
+@{
+    ViewData["Title"] = "Menú principal";
+    ViewData["Usuario"] = Model.Usuario;
+}
+
+<section class="tarjeta tarjeta-angosta">
+    <h2>Menú principal</h2>
+    <p class="ayuda">¿Qué deseas hacer hoy?</p>
+
+    <div class="menu">
+        <a class="boton" asp-controller="Movimiento" asp-action="Index">Registrar movimiento</a>
+        <a class="boton boton-secundario" asp-controller="Movimientos" asp-action="Index">Consultar movimientos</a>
+    </div>
+</section>

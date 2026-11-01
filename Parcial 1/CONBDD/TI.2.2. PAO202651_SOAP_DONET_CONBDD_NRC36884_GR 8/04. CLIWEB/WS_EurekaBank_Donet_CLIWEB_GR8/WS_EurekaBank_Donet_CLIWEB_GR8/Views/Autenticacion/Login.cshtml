@@ -1,0 +1,28 @@
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Iniciar sesión";
+}
+
+<section class="tarjeta tarjeta-angosta">
+    <h2>Iniciar sesión</h2>
+    <p class="ayuda">Ingresa tus credenciales para operar en EurekaBank.</p>
+
+    @if (!string.IsNullOrEmpty(Model.Error))
+    {
+        <div class="alerta alerta-error">@Model.Error</div>
+    }
+
+    <form asp-action="Login" method="post" class="formulario">
+        <label asp-for="Usuario">Usuario</label>
+        <input asp-for="Usuario" autocomplete="username" autofocus />
+        <span asp-validation-for="Usuario" class="error-campo"></span>
+
+        <label asp-for="Contrasena">Contraseña</label>
+        <input asp-for="Contrasena" type="password" autocomplete="current-password" />
+        <span asp-validation-for="Contrasena" class="error-campo"></span>
+
+        <button type="submit" class="boton">Ingresar</button>
+    </form>
+
+    <p class="nota">Credenciales de prueba: MONSTER / MONSTER9</p>
+</section>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Hints de los campos de texto con la paleta de la identidad -->
+    <style name="HintTextAppearanceDark" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/gr8_muted</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="HintTextAppearanceDarkCollapsed" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/gr8_muted</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+</resources>

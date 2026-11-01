@@ -1,0 +1,52 @@
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Iniciar sesión";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] · EurekaBank</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="login-page">
+    <div class="login-shell">
+        <div class="login-brand">
+            <svg viewBox="0 0 48 48" role="img" aria-label="EurekaBank">
+                <rect x="1" y="1" width="46" height="46" rx="12" fill="#0FA3B1" />
+                <path d="M15 14h18M15 14v20M15 24h14M15 34h18" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" fill="none" />
+                <circle cx="37" cy="37" r="4" fill="#F2A541" />
+            </svg>
+            <h1>EurekaBank</h1>
+            <p>Grupo 8 · Arquitectura de Software</p>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.Error))
+        {
+            <div class="alert alert-danger">@Model.Error</div>
+        }
+
+        <form asp-controller="Login" asp-action="Index" method="post">
+            <div class="field">
+                <label class="label" asp-for="Usuario">Usuario</label>
+                <input class="input" asp-for="Usuario" placeholder="Ingrese su usuario" autocomplete="username" autofocus />
+                <span class="field-error" asp-validation-for="Usuario"></span>
+            </div>
+
+            <div class="field">
+                <label class="label" asp-for="Contrasena">Contraseña</label>
+                <input class="input" asp-for="Contrasena" type="password" placeholder="Ingrese su contraseña" autocomplete="current-password" />
+                <span class="field-error" asp-validation-for="Contrasena"></span>
+            </div>
+
+            <div class="login-separator"></div>
+
+            <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
+        </form>
+
+        <p class="login-footer">TI.2.4 · SOAP_RESTFUL_DONET · NRC 36884</p>
+    </div>
+</body>
+</html>

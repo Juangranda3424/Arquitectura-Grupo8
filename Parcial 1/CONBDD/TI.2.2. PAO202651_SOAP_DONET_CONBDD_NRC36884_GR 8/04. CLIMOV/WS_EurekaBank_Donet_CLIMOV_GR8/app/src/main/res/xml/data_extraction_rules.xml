@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+   Reglas de extraccion de datos del cliente movil.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- No se respalda estado local: los datos viven en el servidor. -->
+    </cloud-backup>
+</data-extraction-rules>

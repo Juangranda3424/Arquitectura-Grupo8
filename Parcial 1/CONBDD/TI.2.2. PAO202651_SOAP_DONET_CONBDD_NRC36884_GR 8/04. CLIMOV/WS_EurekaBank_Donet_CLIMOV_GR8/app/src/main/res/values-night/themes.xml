@@ -1,0 +1,14 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Tema oscuro: mantiene la identidad navy de EurekaBank Grupo 8 -->
+    <style name="Base.Theme.WS_EurekaBank_Donet_CLIMOV_GR8" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/accent_teal</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/primary2_navy</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorTertiary">@color/accent_amber</item>
+        <item name="android:colorBackground">@color/primary_navy</item>
+        <item name="colorSurface">@color/primary2_navy</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="colorError">@color/error</item>
+    </style>
+</resources>

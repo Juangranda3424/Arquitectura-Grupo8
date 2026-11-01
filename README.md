@@ -58,6 +58,46 @@ Parcial 1/
 - **docker-compose.yaml:** configuración de servicios y contenedores mediante Docker Compose.
 - **powerdesigner.png:** recurso gráfico relacionado con el diseño de la arquitectura.
 
+## 🗄️ Primer parcial: CONBDD
+
+Implementación del sistema bancario **EurekaBank** con servicios web **SOAP y RESTful** en Java y .NET, conectados a una base de datos. Cada actividad incluye un servidor y cuatro clientes (consola, escritorio, móvil y web).
+
+| Código | Actividad | Tecnología | Base de datos |
+|---|---|---|---|
+| TI.2.1 | Servicios SOAP | Java | MySQL |
+| TI.2.2 | Servicios SOAP | .NET | MySQL |
+| TI.2.3 | Servicios RESTful | Java | MySQL |
+| TI.2.4 | Servicios RESTful | .NET | SQL Server |
+
+```text
+Parcial 1/
+└── CONBDD/
+    └── TI.2.N. PAO202651_<TIPO>_CONBDD_NRC36884_GR 8/
+        ├── 01. UML/ (01. ERS, 02. ECUD, 03. DIAGRAMAS)
+        ├── 03. BDD/
+        ├── 04. SERVIDOR/
+        ├── 04. CLICON/
+        ├── 04. CLIESC/
+        ├── 04. CLIMOV/
+        ├── 04. CLIWEB/
+        └── 05. DOCUMENTACION/
+```
+
+### 🐳 Bases de datos (Docker)
+
+`Parcial 1/CONBDD/docker-compose.yaml` levanta dos contenedores con recursos mínimos y crea una base por proyecto:
+
+| Contenedor | Puerto | Bases | Usuario |
+|---|---|---|---|
+| MySQL 8.4 | 3306 | `eurekabank_ti21`, `eurekabank_ti22`, `eurekabank_ti23` | `MONSTER` / `MONSTER9` |
+| SQL Server 2022 Express | 1433 | `eurekabank_ti24` | `sa` / `EurekaGr8.2026` |
+
+```bash
+cd "Parcial 1/CONBDD"
+docker compose up -d      # crea y carga las bases la primera vez
+docker compose down -v    # borra los datos; el siguiente up vuelve a cargarlos
+```
+
 ## 🎯 Objetivos del repositorio
 
 - Implementar y comprender servicios web SOAP y RESTful.

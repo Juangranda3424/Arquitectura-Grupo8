@@ -1,0 +1,168 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ec.edu.monster</groupId>
+    <artifactId>WS_EurekaBank_Java_CLIWEB_GR8</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>WS_EurekaBank_Java_CLIWEB_GR8</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jakartaee>10.0.0</jakartaee>
+        <jaxws.rt.version>4.0.3</jaxws.rt.version>
+        <junit.version>5.11.4</junit.version>
+    </properties>
+
+    <dependencies>
+        <!-- Servlet 6.0 + JSP 3.1 + JSTL: los provee Payara 7 en tiempo de ejecución -->
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>${jakartaee}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JSP API -->
+        <dependency>
+            <groupId>jakarta.servlet.jsp.jstl</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Jakarta Standard Tag Library (implementación, viaja en el WAR) -->
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
+        <!--
+            Runtime JAX-WS (Metro) para invocar los servicios SOAP del servidor TI.2.1.
+            Va empaquetado en WEB-INF/lib (junto con jaxb-impl, saaj-impl, woodstox…)
+            porque Payara Micro no trae runtime de JAX-WS: sin esto el cliente falla
+            con "JAX-WS provider not found" al crear el port desde los stubs de ws/.
+            Sobre un Payara Server/GlassFish completo el servidor impone su propio
+            runtime y estas librerías simplemente quedan sin usar.
+        -->
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-rt</artifactId>
+            <version>${jaxws.rt.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- Context root del cliente web: http://localhost:8081/WS_EurekaBank_Java_CLIWEB_GR8/ -->
+        <finalName>WS_EurekaBank_Java_CLIWEB_GR8</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <release>17</release>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.6.0</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <!--
+            Arranque local con Payara Micro (Jakarta EE 11). Opt-in: no afecta al build normal.
+
+                mvn -Prun package     compila y arranca el cliente web en http://localhost:8081
+                mvn -Prun exec:exec   arranca sin recompilar, usando el WAR ya empaquetado
+
+            El cliente web usa el puerto 8081 para convivir con el servidor SOAP, que corre
+            en 8080 con el mismo perfil. EurekaBankSoapClient apunta a localhost:8080.
+
+            Payara Micro se descarga la primera vez desde Maven Central a target/;
+            usa el `java` del PATH, que debe ser JDK 21 (Payara 7 corre sobre Java SE 21).
+        -->
+        <profile>
+            <id>run</id>
+            <properties>
+                <payara.micro.version>7.2026.10</payara.micro.version>
+                <payara.micro.port>8081</payara.micro.port>
+                <payara.micro.jar>${project.build.directory}/payara-micro-${payara.micro.version}.jar</payara.micro.jar>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>3.8.1</version>
+                        <executions>
+                            <execution>
+                                <id>copiar-payara-micro</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>fish.payara.extras</groupId>
+                                            <artifactId>payara-micro</artifactId>
+                                            <version>${payara.micro.version}</version>
+                                            <type>jar</type>
+                                            <outputDirectory>${project.build.directory}</outputDirectory>
+                                            <destFileName>payara-micro-${payara.micro.version}.jar</destFileName>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.5.0</version>
+                        <configuration>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-jar</argument>
+                                <argument>${payara.micro.jar}</argument>
+                                <argument>--port</argument>
+                                <argument>${payara.micro.port}</argument>
+                                <argument>--noCluster</argument>
+                                <argument>--rootDir</argument>
+                                <argument>${project.build.directory}/payara-micro</argument>
+                                <argument>--deploy</argument>
+                                <argument>${project.build.directory}/${project.build.finalName}.war</argument>
+                            </arguments>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>arrancar-payara-micro</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

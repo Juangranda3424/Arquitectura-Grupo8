@@ -1,0 +1,20 @@
+<%--
+    Cabecera compartida del cliente web (identidad EurekaBank · GR8).
+    Requiere el taglib "c" declarado en la página que la incluye.
+--%>
+<header class="topbar">
+    <a class="brand" href="${pageContext.request.contextPath}/Home">
+        <svg width="38" height="38" viewBox="0 0 48 48" aria-hidden="true">
+            <rect x="1" y="1" width="46" height="46" rx="12" fill="#0FA3B1"/>
+            <path d="M16 14h16v5H22v5h9v5h-9v5h10v5H16z" fill="#FFFFFF"/>
+        </svg>
+        <span class="brand-text">
+            <strong>EurekaBank</strong>
+            <small>Grupo 8 · Arquitectura de Software</small>
+        </span>
+    </a>
+    <div class="topbar-actions">
+        <span class="topbar-user">${sessionScope.username}</span>
+        <a class="btn btn-ghost" href="${pageContext.request.contextPath}/Logout">Salir</a>
+    </div>
+</header>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Estado normal -->
+    <item android:state_enabled="true" android:color="@color/gr8_muted" android:alpha="1.0"/>
+    <!-- Estado enfocado -->
+    <item android:state_focused="true" android:color="@color/gr8_teal" android:alpha="1.0"/>
+    <!-- Estado deshabilitado -->
+    <item android:color="@color/gr8_muted" android:alpha="1.0"/>
+</selector>

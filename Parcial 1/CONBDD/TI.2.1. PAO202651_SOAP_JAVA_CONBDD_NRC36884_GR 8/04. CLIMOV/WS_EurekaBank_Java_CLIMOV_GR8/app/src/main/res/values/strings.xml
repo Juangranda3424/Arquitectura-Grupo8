@@ -1,0 +1,73 @@
+<resources>
+    <!-- Marca e identidad -->
+    <string name="app_name">EurekaBank GR8</string>
+    <string name="brand_name">EurekaBank</string>
+    <string name="brand_subtitle">Grupo 8 · Arquitectura de Software</string>
+    <string name="brand_footer">EurekaBank · Grupo 8 · Servicios web SOAP</string>
+    <string name="brand_services">Servicios web SOAP</string>
+    <string name="brand_server">Servidor WS_EurekaBank_Java_GR8 · MySQL</string>
+    <string name="brand_group">GR8</string>
+    <string name="brand_logo">Logotipo de EurekaBank</string>
+
+    <!-- Acceso -->
+    <string name="login_title">Iniciar sesión</string>
+    <string name="login_help">Ingrese sus credenciales para operar en EurekaBank.</string>
+    <string name="username">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="login_button">ENTRAR</string>
+    <string name="logout">Salir</string>
+
+    <!-- Menú -->
+    <string name="welcome">Bienvenido</string>
+    <string name="menu_eyebrow">MENÚ PRINCIPAL</string>
+    <string name="menu_help">Seleccione una operación para continuar.</string>
+    <string name="menu_deposito_help">Realizar un depósito</string>
+    <string name="menu_retiro_help">Realizar un retiro</string>
+    <string name="menu_transferencia_help">Transferir entre cuentas</string>
+    <string name="menu_movimientos_help">Ver historial</string>
+    <string name="menu_datos_help">Consultar información</string>
+
+    <!-- Operaciones -->
+    <string name="deposito">Depósito</string>
+    <string name="retiro">Retiro</string>
+    <string name="transferencia">Transferencia</string>
+    <string name="movimientos">Movimientos</string>
+    <string name="datos_cuenta">Datos de Cuenta</string>
+    <string name="consultar">Consultar</string>
+    <string name="realizar">Realizar</string>
+
+    <string name="screen_deposito">Realizar depósito</string>
+    <string name="screen_deposito_help">Registre el monto a acreditar en la cuenta.</string>
+    <string name="form_deposito_title">Información del depósito</string>
+
+    <string name="screen_retiro">Realizar retiro</string>
+    <string name="screen_retiro_help">Retire un monto disponible de la cuenta.</string>
+    <string name="form_retiro_title">Información del retiro</string>
+
+    <string name="screen_transferencia">Realizar transferencia</string>
+    <string name="screen_transferencia_help">El servidor debita la cuenta origen y acredita la destino.</string>
+    <string name="form_transferencia_title">Información de la transferencia</string>
+
+    <string name="screen_datos">Datos de la cuenta</string>
+    <string name="screen_datos_help">Consulte saldo y contador de movimientos.</string>
+    <string name="form_datos_title">Consultar datos</string>
+    <string name="label_saldo">Saldo</string>
+    <string name="label_contador">Contador de movimientos</string>
+
+    <string name="screen_movimientos">Movimientos</string>
+    <string name="screen_movimientos_help">Historial y resumen de la cuenta.</string>
+    <string name="label_saldo_actual">Saldo actual</string>
+    <string name="label_total_ingresos">Total ingresos</string>
+    <string name="label_total_egresos">Total egresos</string>
+    <string name="label_saldo_neto">Saldo neto</string>
+
+    <string name="label_cuenta">Número de cuenta</string>
+    <string name="label_cuenta_origen">Cuenta origen</string>
+    <string name="label_cuenta_destino">Cuenta destino</string>
+    <string name="label_monto">Monto</string>
+    <string name="label_monto_retiro">Monto a retirar</string>
+    <string name="action_deposito">Realizar depósito</string>
+    <string name="action_retiro">Realizar retiro</string>
+    <string name="action_transferencia">Realizar transferencia</string>
+    <string name="action_consultar">Consultar</string>
+</resources>

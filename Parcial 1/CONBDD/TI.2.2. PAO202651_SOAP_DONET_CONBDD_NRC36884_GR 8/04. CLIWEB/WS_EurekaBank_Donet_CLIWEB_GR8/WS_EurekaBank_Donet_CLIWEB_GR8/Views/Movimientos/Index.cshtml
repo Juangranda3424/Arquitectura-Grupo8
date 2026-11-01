@@ -1,0 +1,70 @@
+@using System.Globalization
+@model MovimientosViewModel
+@{
+    ViewData["Title"] = "Consultar movimientos";
+    ViewData["Usuario"] = Model.Usuario;
+}
+
+<section class="tarjeta">
+    <h2>Consultar movimientos</h2>
+    <p class="ayuda">Historial de movimientos de una cuenta mediante el servicio SOAP.</p>
+
+    @if (!string.IsNullOrEmpty(Model.Error))
+    {
+        <div class="alerta alerta-error">@Model.Error</div>
+    }
+
+    <form asp-action="Index" method="post" class="formulario">
+        <label asp-for="Cuenta">Cuenta</label>
+        <input asp-for="Cuenta" autocomplete="off" placeholder="Ej: 00100001" />
+        <span asp-validation-for="Cuenta" class="error-campo"></span>
+
+        <label asp-for="FiltroTipo">Filtrar por tipo</label>
+        <select asp-for="FiltroTipo" id="FiltroTipo">
+            @foreach (var filtro in MovimientosViewModel.Filtros)
+            {
+                <option value="@filtro.Codigo" selected="@(filtro.Codigo == (Model.FiltroTipo ?? ""))">@filtro.Etiqueta</option>
+            }
+        </select>
+
+        <button type="submit" class="boton">Ver movimientos</button>
+    </form>
+
+    @if (Model.Consulto)
+    {
+        <p class="mensaje @(Model.Movimientos.Count > 0 ? "exito" : null)" role="status">@Model.Mensaje</p>
+
+        @if (Model.Movimientos.Count > 0)
+        {
+            <div class="tabla-contenedor">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Nro.</th>
+                            <th>Fecha</th>
+                            <th>Tipo</th>
+                            <th>Acción</th>
+                            <th>Importe</th>
+                            <th>Cuenta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var movimiento in Model.Movimientos)
+                        {
+                            <tr>
+                                <td>@movimiento.NroMov</td>
+                                <td>@movimiento.Fecha</td>
+                                <td>@movimiento.Tipo</td>
+                                <td>@movimiento.Accion</td>
+                                <td>@movimiento.Importe.ToString("N2", CultureInfo.InvariantCulture)</td>
+                                <td>@movimiento.Cuenta</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    }
+
+    <a class="enlace" asp-controller="Menu" asp-action="Index">Regresar al menú</a>
+</section>

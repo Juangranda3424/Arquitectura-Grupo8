@@ -1,0 +1,355 @@
+/* wwwroot/css/site.css
+   Identidad visual compartida de EurekaBank · Grupo 8 (TI.2.2 SOAP .NET) */
+
+:root {
+    --primario: #0B1F3A;
+    --primario-2: #13315C;
+    --acento: #0FA3B1;
+    --acento-oscuro: #0C8792;
+    --ambar: #F2A541;
+    --fondo: #F4F6FA;
+    --superficie: #FFFFFF;
+    --texto: #1E293B;
+    --atenuado: #64748B;
+    --exito: #16A34A;
+    --error: #DC2626;
+    --borde: #E2E8F0;
+    --radio: 12px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background:
+        radial-gradient(circle at 12% 8%, rgba(15, 163, 177, 0.16), transparent 42%),
+        radial-gradient(circle at 88% 0%, rgba(242, 165, 65, 0.14), transparent 38%),
+        var(--fondo);
+    color: var(--texto);
+    font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+}
+
+.cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 32px;
+    background: linear-gradient(120deg, var(--primario), var(--primario-2));
+    color: #FFFFFF;
+    box-shadow: 0 8px 24px rgba(11, 31, 58, 0.28);
+}
+
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo {
+    width: 54px;
+    height: 54px;
+    flex: 0 0 auto;
+}
+
+.marca-texto h1 {
+    margin: 0;
+    font-size: 22px;
+    letter-spacing: 0.4px;
+}
+
+.marca-texto p {
+    margin: 2px 0 0;
+    font-size: 12.5px;
+    color: #C7D2E0;
+}
+
+.cabecera-derecha {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.chip {
+    padding: 6px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 999px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    color: var(--ambar);
+    white-space: nowrap;
+}
+
+.sesion {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+}
+
+.sesion-usuario {
+    font-size: 13.5px;
+    color: #C7D2E0;
+}
+
+.btn-salir {
+    padding: 7px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 8px;
+    background: transparent;
+    color: #FFFFFF;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.18s ease;
+}
+
+.btn-salir:hover {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.contenedor {
+    flex: 1;
+    width: 100%;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 34px 20px 20px;
+}
+
+.tarjeta {
+    background: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    padding: 28px;
+    box-shadow: 0 10px 30px rgba(11, 31, 58, 0.08);
+}
+
+.tarjeta-angosta {
+    max-width: 460px;
+    margin: 0 auto;
+}
+
+.tarjeta h2 {
+    margin: 0 0 6px;
+    font-size: 20px;
+    color: var(--primario);
+}
+
+.ayuda {
+    margin: 0 0 22px;
+    color: var(--atenuado);
+    font-size: 14px;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.formulario label {
+    margin-top: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--atenuado);
+}
+
+input,
+select {
+    padding: 11px 13px;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    background: #FBFCFF;
+    color: var(--texto);
+    font-family: inherit;
+    font-size: 14.5px;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--acento);
+    box-shadow: 0 0 0 3px rgba(15, 163, 177, 0.18);
+}
+
+.boton {
+    display: block;
+    margin-top: 22px;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    background: var(--acento);
+    color: #FFFFFF;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.18s ease, transform 0.12s ease;
+}
+
+.boton:hover {
+    background: var(--acento-oscuro);
+}
+
+.boton:active {
+    transform: translateY(1px);
+}
+
+.boton-secundario {
+    background: #FFFFFF;
+    color: var(--primario);
+    border: 1px solid var(--borde);
+}
+
+.boton-secundario:hover {
+    background: var(--fondo);
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.enlace {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--atenuado);
+    font-family: inherit;
+    font-size: 13.5px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.enlace:hover {
+    color: var(--primario);
+}
+
+.mensaje {
+    min-height: 22px;
+    margin: 16px 0 0;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--atenuado);
+}
+
+.mensaje.exito {
+    color: var(--exito);
+}
+
+.nota {
+    margin: 12px 0 0;
+    font-size: 12.5px;
+    color: var(--atenuado);
+}
+
+.alerta {
+    margin: 0 0 12px;
+    padding: 11px 14px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+}
+
+.alerta-error {
+    background: #FEE2E2;
+    border: 1px solid #FECACA;
+    color: #991B1B;
+}
+
+.alerta-exito {
+    background: #DCFCE7;
+    border: 1px solid #BBF7D0;
+    color: #166534;
+}
+
+.error-campo {
+    min-height: 0;
+    font-size: 12.5px;
+    color: var(--error);
+}
+
+.grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.tabla-contenedor {
+    margin-top: 18px;
+    overflow-x: auto;
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+}
+
+.tabla th {
+    padding: 10px 12px;
+    background: var(--primario);
+    color: #FFFFFF;
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.tabla th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.tabla th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.tabla td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--borde);
+}
+
+.tabla tbody tr:nth-child(even) {
+    background: #F8FAFC;
+}
+
+.tabla tbody tr:hover {
+    background: #E6F6F8;
+}
+
+.pie {
+    padding: 16px 32px;
+    border-top: 1px solid var(--borde);
+    color: var(--atenuado);
+    font-size: 12px;
+    text-align: center;
+}
+
+.oculto {
+    display: none;
+}
+
+@media (max-width: 640px) {
+    .cabecera {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px 20px;
+    }
+
+    .tarjeta {
+        padding: 20px;
+    }
+}

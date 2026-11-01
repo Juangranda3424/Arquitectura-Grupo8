@@ -1,0 +1,16 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Tema claro de la identidad EurekaBank Grupo 8 -->
+    <style name="Base.Theme.WS_EurekaBank_Donet_CLIMOV_GR8" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/accent_teal</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/primary2_navy</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorTertiary">@color/accent_amber</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/text</item>
+        <item name="colorError">@color/error</item>
+    </style>
+
+    <style name="Theme.WS_EurekaBank_Donet_CLIMOV_GR8" parent="Base.Theme.WS_EurekaBank_Donet_CLIMOV_GR8" />
+</resources>

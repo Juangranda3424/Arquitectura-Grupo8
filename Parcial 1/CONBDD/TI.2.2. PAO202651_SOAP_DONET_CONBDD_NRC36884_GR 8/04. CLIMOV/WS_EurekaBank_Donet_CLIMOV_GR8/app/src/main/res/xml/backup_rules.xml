@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+   Reglas de copia de seguridad del cliente movil.
+-->
+<full-backup-content>
+    <!-- Sin estado persistente que respaldar: los datos viven en el servidor. -->
+</full-backup-content>

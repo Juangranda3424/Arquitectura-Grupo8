@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Paleta de la identidad EurekaBank Grupo 8 -->
+    <color name="primary_navy">#0B1F3A</color>
+    <color name="primary2_navy">#13315C</color>
+    <color name="accent_teal">#0FA3B1</color>
+    <color name="accent_amber">#F2A541</color>
+    <color name="background">#F4F6FA</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="text">#1E293B</color>
+    <color name="muted">#64748B</color>
+    <color name="success">#16A34A</color>
+    <color name="error">#DC2626</color>
+    <color name="border">#E2E8F0</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+</resources>
