@@ -1,0 +1,100 @@
+# EurekaBank CONBDD databases (TI.2.1 - TI.2.4), tuned for low-resource machines.
+#
+#   docker compose up -d          # first run creates and seeds every database
+#   docker compose down           # stop (data is kept in the named volumes)
+#   docker compose down -v        # stop and wipe all data (next "up" re-seeds)
+#
+# MySQL 8.4  -> localhost:3306  eurekabank_ti21 | eurekabank_ti22 | eurekabank_ti23  (MONSTER / MONSTER9)
+# SQL Server -> localhost,1433  eurekabank_ti24                                     (sa / EurekaGr8.2026)
+
+name: eurekabank-conbdd
+
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: eurekabank-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: MONSTER
+      MYSQL_PASSWORD: MONSTER9
+      TZ: America/Guayaquil
+    command:
+      - --performance-schema=OFF
+      - --innodb-buffer-pool-size=64M
+      - --innodb-log-buffer-size=8M
+      - --innodb-redo-log-capacity=32M
+      - --key-buffer-size=8M
+      - --max-connections=40
+      - --table-open-cache=256
+      - --tmp-table-size=16M
+      - --max-heap-table-size=16M
+      - --skip-name-resolve
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      # Seed scripts run once, in name order, only while the data volume is empty.
+      - "./TI.2.1. PAO202651_SOAP_JAVA_CONBDD_NRC36884_GR 8/03. BDD/crearbd.sql:/docker-entrypoint-initdb.d/10-ti21.sql:ro"
+      - "./TI.2.2. PAO202651_SOAP_DONET_CONBDD_NRC36884_GR 8/03. BDD/Crear_Base.sql:/docker-entrypoint-initdb.d/20-ti22.sql:ro"
+      - "./TI.2.3. PAO202651_SOAP_RESTFUL_JAVA_CONBDD_NRC36884_GR 8/03. BDD/crearbd.sql:/docker-entrypoint-initdb.d/30-ti23.sql:ro"
+      - ./docker/mysql/99-grants.sql:/docker-entrypoint-initdb.d/99-grants.sql:ro
+    mem_limit: 400m
+    cpus: 1.0
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: eurekabank-mssql
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Express
+      MSSQL_SA_PASSWORD: EurekaGr8.2026
+      MSSQL_MEMORY_LIMIT_MB: "1024"
+      MSSQL_AGENT_ENABLED: "false"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+    mem_limit: 2g
+    cpus: 1.0
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -Q 'SELECT 1' -b -o /dev/null"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 40s
+
+  # One-shot job: seeds eurekabank_ti24 only when it does not exist yet, then exits.
+  mssql-init:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: eurekabank-mssql-init
+    depends_on:
+      mssql:
+        condition: service_healthy
+    environment:
+      SA_PASSWORD: EurekaGr8.2026
+    volumes:
+      - "./TI.2.4. PAO202651_SOAP_RESTFUL_DONET_CONBDD_NRC36884_GR 8/03. BDD:/scripts:ro"
+    entrypoint:
+      - /bin/bash
+      - -c
+      - |
+        SQL="/opt/mssql-tools18/bin/sqlcmd -C -S mssql -U sa -P $$SA_PASSWORD -b"
+        if [ "$$($$SQL -h -1 -W -Q "SET NOCOUNT ON; SELECT COUNT(*) FROM sys.databases WHERE name = 'eurekabank_ti24'")" = "1" ]; then
+          echo "eurekabank_ti24 already exists, nothing to seed."
+        else
+          $$SQL -i /scripts/Crear_Base.sql && $$SQL -i /scripts/Insertar_Datos.sql && echo "eurekabank_ti24 seeded."
+        fi
+    mem_limit: 256m
+    restart: "no"
+
+volumes:
+  mysql_data:
+  mssql_data:
