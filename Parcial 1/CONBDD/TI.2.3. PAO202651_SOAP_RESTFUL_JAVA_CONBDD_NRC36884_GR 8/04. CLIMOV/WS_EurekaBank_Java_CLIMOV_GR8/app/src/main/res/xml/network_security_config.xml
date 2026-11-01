@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Configuración para desarrollo local - Permite HTTP sin encriptar -->
+    <!-- 
+    IMPORTANTE: Esta configuración permite tráfico HTTP sin encriptar (cleartext)
+    Solo debe usarse en desarrollo. Para producción, usar HTTPS.
+    -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <!-- Permite certificados del sistema -->
+            <certificates src="system"/>
+            <!-- Permite certificados de usuario (para desarrollo) -->
+            <certificates src="user"/>
+        </trust-anchors>
+    </base-config>
+</network-security-config>

@@ -1,0 +1,10 @@
+<%--
+    Avisos de error y de éxito compartidos.
+    Requiere el taglib "c" declarado en la página que la incluye.
+--%>
+<c:if test="${error != null}">
+    <div class="alert alert-error">${error}</div>
+</c:if>
+<c:if test="${success != null}">
+    <div class="alert alert-ok">${success}</div>
+</c:if>

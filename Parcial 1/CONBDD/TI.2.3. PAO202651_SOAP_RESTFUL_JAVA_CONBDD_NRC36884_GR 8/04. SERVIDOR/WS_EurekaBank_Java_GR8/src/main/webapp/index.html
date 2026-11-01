@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EurekaBank · Servicio RESTful (GR8)</title>
+    <style>
+        :root {
+            --navy: #0B1F3A;
+            --navy-2: #13315C;
+            --teal: #0FA3B1;
+            --amber: #F2A541;
+            --bg: #F4F6FA;
+            --surface: #FFFFFF;
+            --text: #1E293B;
+            --muted: #64748B;
+            --border: #E2E8F0;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: radial-gradient(circle at 20% 0%, var(--navy-2) 0%, var(--navy) 60%);
+            font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+            color: var(--text);
+        }
+
+        .card {
+            width: 100%;
+            max-width: 760px;
+            background: var(--surface);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 24px 60px rgba(11, 31, 58, .45);
+            overflow: hidden;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 24px 28px;
+            background: var(--navy);
+            color: #fff;
+        }
+
+        .brand-text { display: flex; flex-direction: column; }
+        .brand-text strong { font-size: 20px; letter-spacing: .3px; }
+        .brand-text span { font-size: 12px; color: #9FB3CC; letter-spacing: .6px; text-transform: uppercase; }
+
+        main { padding: 28px; }
+
+        h1 { margin: 0 0 6px; font-size: 22px; }
+        .lead { margin: 0 0 22px; color: var(--muted); font-size: 14px; }
+
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+        th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .5px; }
+
+        code {
+            font-family: "Cascadia Mono", Consolas, monospace;
+            font-size: 12.5px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 2px 6px;
+            color: var(--navy-2);
+        }
+
+        .method {
+            display: inline-block;
+            min-width: 54px;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            color: #fff;
+            background: var(--teal);
+            border-radius: 6px;
+            padding: 3px 6px;
+        }
+
+        .method.post { background: var(--amber); color: #3B2500; }
+
+        footer {
+            padding: 16px 28px 24px;
+            color: var(--muted);
+            font-size: 12px;
+            border-top: 1px solid var(--border);
+            background: var(--bg);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <header>
+            <!-- Logo vectorial: monograma "E" en cuadrado redondeado -->
+            <svg width="48" height="48" viewBox="0 0 48 48" role="img" aria-label="EurekaBank">
+                <rect x="1" y="1" width="46" height="46" rx="12" fill="#0FA3B1"/>
+                <path d="M16 14h16v5H22v5h9v5h-9v5h10v5H16z" fill="#FFFFFF"/>
+            </svg>
+            <div class="brand-text">
+                <strong>EurekaBank</strong>
+                <span>Grupo 8 · Arquitectura de Software</span>
+            </div>
+        </header>
+
+        <main>
+            <h1>Servicio RESTful Java</h1>
+            <p class="lead">
+                Servidor TI.2.3 (Jakarta EE + MySQL). Base de recursos:
+                <code>/WS_EurekaBank_Java_GR8/resources</code>
+            </p>
+
+            <table>
+                <thead>
+                    <tr><th>Método</th><th>Ruta</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="method post">POST</span></td><td><code>login</code></td><td>Autenticación de usuario</td></tr>
+                    <tr><td><span class="method">GET</span></td><td><code>cuenta/{codigo}</code></td><td>Datos de una cuenta</td></tr>
+                    <tr><td><span class="method post">POST</span></td><td><code>cuenta/deposito</code></td><td>Registrar depósito</td></tr>
+                    <tr><td><span class="method post">POST</span></td><td><code>cuenta/retiro</code></td><td>Registrar retiro</td></tr>
+                    <tr><td><span class="method post">POST</span></td><td><code>cuenta/transferencia</code></td><td>Registrar transferencia</td></tr>
+                    <tr><td><span class="method post">POST</span></td><td><code>movimiento</code></td><td>Movimientos de una cuenta</td></tr>
+                </tbody>
+            </table>
+        </main>
+
+        <footer>
+            EurekaBank · Grupo 8 · Arquitectura de Software — Clientes: CLICON, CLIESC, CLIMOV y CLIWEB.
+        </footer>
+    </div>
+</body>
+</html>

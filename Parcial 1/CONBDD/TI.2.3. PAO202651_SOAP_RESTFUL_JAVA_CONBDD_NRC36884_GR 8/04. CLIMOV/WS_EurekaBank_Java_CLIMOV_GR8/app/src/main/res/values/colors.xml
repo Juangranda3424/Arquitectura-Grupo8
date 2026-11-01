@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Identidad visual EurekaBank · Grupo 8 · Arquitectura de Software -->
+    <color name="navy">#0B1F3A</color>
+    <color name="navy_2">#13315C</color>
+    <color name="teal">#0FA3B1</color>
+    <color name="teal_oscuro">#0C8693</color>
+    <color name="teal_claro">#E6F6F8</color>
+    <color name="amber">#F2A541</color>
+    <color name="fondo">#F4F6FA</color>
+    <color name="superficie">#FFFFFF</color>
+    <color name="texto">#1E293B</color>
+    <color name="muted">#64748B</color>
+    <color name="exito">#16A34A</color>
+    <color name="exito_claro">#E7F7EC</color>
+    <color name="error">#DC2626</color>
+    <color name="error_claro">#FDECEC</color>
+    <color name="borde">#E2E8F0</color>
+    <color name="blanco">#FFFFFF</color>
+    <color name="negro">#000000</color>
+</resources>
