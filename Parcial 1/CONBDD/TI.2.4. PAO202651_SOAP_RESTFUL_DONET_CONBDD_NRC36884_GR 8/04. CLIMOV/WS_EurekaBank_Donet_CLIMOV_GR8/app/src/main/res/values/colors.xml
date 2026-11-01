@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Identidad compartida EurekaBank · Grupo 8 (S8) -->
+    <color name="navy">#0B1F3A</color>
+    <color name="navy_light">#13315C</color>
+    <color name="teal">#0FA3B1</color>
+    <color name="teal_dark">#0C848F</color>
+    <color name="amber">#F2A541</color>
+    <color name="background">#F4F6FA</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="text_primary">#1E293B</color>
+    <color name="text_secondary">#64748B</color>
+    <color name="border">#E2E8F0</color>
+    <color name="success">#16A34A</color>
+    <color name="success_bg">#E8F7EE</color>
+    <color name="error">#DC2626</color>
+    <color name="error_bg">#FDECEC</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="teal_soft">#E3F4F6</color>
+</resources>

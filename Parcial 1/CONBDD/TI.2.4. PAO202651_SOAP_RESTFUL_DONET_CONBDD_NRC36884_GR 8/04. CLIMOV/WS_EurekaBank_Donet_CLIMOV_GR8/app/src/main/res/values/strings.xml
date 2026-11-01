@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">EurekaBank GR8</string>
+    <string name="brand_name">EurekaBank</string>
+    <string name="brand_subtitle">Grupo 8 · Arquitectura de Software</string>
+    <string name="login_title">Iniciar Sesión</string>
+    <string name="login_subtitle">Ingrese sus credenciales para continuar</string>
+    <string name="welcome">Bienvenido</string>
+    <string name="username">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="login_button">INGRESAR</string>
+    <string name="logout">Salir</string>
+    <string name="deposito">Depósito</string>
+    <string name="deposito_desc">Registrar un depósito</string>
+    <string name="retiro">Retiro</string>
+    <string name="retiro_desc">Registrar un retiro</string>
+    <string name="transferencia">Transferencia</string>
+    <string name="transferencia_desc">Transferir entre cuentas</string>
+    <string name="movimientos">Movimientos</string>
+    <string name="movimientos_desc">Consultar historial</string>
+    <string name="datos_cuenta">Datos de Cuenta</string>
+    <string name="datos_cuenta_desc">Consultar información</string>
+    <string name="consultar">Consultar</string>
+    <string name="realizar">Realizar</string>
+    <string name="numero_cuenta">Número de Cuenta</string>
+    <string name="monto">Monto</string>
+    <string name="cuenta_origen">Cuenta Origen</string>
+    <string name="cuenta_destino">Cuenta Destino</string>
+    <string name="saldo_actual">Saldo Actual</string>
+    <string name="total_ingresos">Total Ingresos</string>
+    <string name="total_egresos">Total Egresos</string>
+    <string name="saldo_neto">Saldo Neto</string>
+    <string name="contador_movimientos">Contador de Movimientos</string>
+    <string name="menu_opciones">Seleccione una operación</string>
+</resources>

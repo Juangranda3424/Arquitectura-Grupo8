@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logotipo EurekaBank · Grupo 8: monograma "E" vectorial (sin bitmaps) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <path
+        android:fillColor="@color/teal"
+        android:pathData="M12,1 L36,1 Q47,1 47,12 L47,36 Q47,47 36,47 L12,47 Q1,47 1,36 L1,12 Q1,1 12,1 Z" />
+    <path
+        android:strokeColor="@color/white"
+        android:strokeWidth="4.5"
+        android:strokeLineCap="round"
+        android:pathData="M15,14 L33,14 M15,14 L15,34 M15,24 L29,24 M15,34 L33,34" />
+    <path
+        android:fillColor="@color/amber"
+        android:pathData="M37,33 m-4,0 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0" />
+</vector>

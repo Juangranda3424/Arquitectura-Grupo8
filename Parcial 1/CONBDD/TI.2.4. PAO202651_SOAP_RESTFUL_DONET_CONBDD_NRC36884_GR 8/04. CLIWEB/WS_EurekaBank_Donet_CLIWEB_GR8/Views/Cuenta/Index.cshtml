@@ -1,0 +1,74 @@
+@{
+    ViewBag.Title = "Datos de cuenta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cuenta = ViewBag.Cuenta as WS_EurekaBank_Donet_CLIWEB_GR8.ec.edu.monster.model.CuentaModel;
+}
+
+<section class="page-head">
+    <h1>Datos de cuenta</h1>
+    <p>Consulta la información registrada de una cuenta.</p>
+</section>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<div class="card">
+    @using (Html.BeginForm("Index", "Cuenta", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="field">
+            <label class="label" for="cuenta">Número de cuenta</label>
+            <input class="input" type="text" id="cuenta" name="cuenta" placeholder="Ej. 00200001" required />
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Consultar cuenta</button>
+        </div>
+    }
+</div>
+
+@if (cuenta != null)
+{
+    <div class="card">
+        <h2 class="card-title">Cuenta @cuenta.ChrCuenCodigo</h2>
+        <p class="card-subtitle">Información obtenida del servidor.</p>
+
+        <div class="detail-grid">
+            <div class="detail-item">
+                <h4>Código de cuenta</h4>
+                <p>@cuenta.ChrCuenCodigo</p>
+            </div>
+            <div class="detail-item">
+                <h4>Saldo</h4>
+                <p class="highlight">S/ @cuenta.DecCuenSaldo.ToString("N2")</p>
+            </div>
+            <div class="detail-item">
+                <h4>Contador de movimientos</h4>
+                <p>@cuenta.IntCuenContMov</p>
+            </div>
+            <div class="detail-item">
+                <h4>Estado</h4>
+                <p>@cuenta.VchCuenEstado</p>
+            </div>
+            <div class="detail-item">
+                <h4>Moneda</h4>
+                <p>@cuenta.ChrMoneCodigo</p>
+            </div>
+            <div class="detail-item">
+                <h4>Sucursal</h4>
+                <p>@cuenta.ChrSucucodigo</p>
+            </div>
+            <div class="detail-item">
+                <h4>Cliente</h4>
+                <p>@cuenta.ChrClieCodigo</p>
+            </div>
+            <div class="detail-item">
+                <h4>Fecha de creación</h4>
+                <p>@(cuenta.DttCuenFechaCreacion.HasValue ? cuenta.DttCuenFechaCreacion.Value.ToString("dd/MM/yyyy") : "—")</p>
+            </div>
+        </div>
+    </div>
+}

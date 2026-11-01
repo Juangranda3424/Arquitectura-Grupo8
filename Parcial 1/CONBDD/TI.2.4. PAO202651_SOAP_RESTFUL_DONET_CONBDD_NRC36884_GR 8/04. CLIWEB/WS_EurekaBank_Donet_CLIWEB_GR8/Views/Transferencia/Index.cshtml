@@ -1,0 +1,48 @@
+@{
+    ViewBag.Title = "Transferencia";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="page-head">
+    <h1>Transferencia</h1>
+    <p>Transfiera un monto entre dos cuentas.</p>
+</section>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+@if (ViewBag.Success != null)
+{
+    <div class="alert alert-success">@ViewBag.Success</div>
+}
+
+<div class="card">
+    <h2 class="card-title">Nueva transferencia</h2>
+    <p class="card-subtitle">La cuenta origen y destino deben ser diferentes.</p>
+
+    @using (Html.BeginForm("Index", "Transferencia", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="field">
+            <label class="label" for="cuentaOrigen">Cuenta origen</label>
+            <input class="input" type="text" id="cuentaOrigen" name="cuentaOrigen" placeholder="Ej. 00200001" required />
+        </div>
+
+        <div class="field">
+            <label class="label" for="cuentaDestino">Cuenta destino</label>
+            <input class="input" type="text" id="cuentaDestino" name="cuentaDestino" placeholder="Ej. 00100001" required />
+        </div>
+
+        <div class="field">
+            <label class="label" for="monto">Monto a transferir</label>
+            <input class="input" type="number" id="monto" name="monto" placeholder="0.00" step="0.01" min="0.01" required />
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Registrar transferencia</button>
+        </div>
+    }
+</div>

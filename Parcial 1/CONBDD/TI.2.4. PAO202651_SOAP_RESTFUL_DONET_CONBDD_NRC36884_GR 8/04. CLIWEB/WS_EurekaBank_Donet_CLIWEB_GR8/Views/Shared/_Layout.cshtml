@@ -1,0 +1,46 @@
+@{
+    var usuario = Session["Username"] != null ? Session["Username"].ToString() : null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title · EurekaBank</title>
+    <link rel="stylesheet" href="@Url.Content("~/Content/Site.css")" />
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="@Url.Action("Index", "Home")">
+            <svg class="logo" viewBox="0 0 48 48" role="img" aria-label="EurekaBank">
+                <rect x="1" y="1" width="46" height="46" rx="12" fill="#0FA3B1" />
+                <path d="M15 14h18M15 14v20M15 24h14M15 34h18" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" fill="none" />
+                <circle cx="37" cy="37" r="4" fill="#F2A541" />
+            </svg>
+            <span class="brand-text">
+                <strong>EurekaBank</strong>
+                <small>Grupo 8 · Arquitectura de Software</small>
+            </span>
+        </a>
+
+        @if (usuario != null)
+        {
+            <div class="topbar-user">
+                <span class="user-chip">@usuario</span>
+                <a class="btn btn-ghost" href="@Url.Action("Logout", "Login")">Cerrar sesión</a>
+            </div>
+        }
+    </header>
+
+    <main class="container">
+        @RenderBody()
+    </main>
+
+    <footer class="footer">
+        TI.2.4 · SOAP_RESTFUL_DONET · CONBDD — NRC 36884 · Grupo 8
+    </footer>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
