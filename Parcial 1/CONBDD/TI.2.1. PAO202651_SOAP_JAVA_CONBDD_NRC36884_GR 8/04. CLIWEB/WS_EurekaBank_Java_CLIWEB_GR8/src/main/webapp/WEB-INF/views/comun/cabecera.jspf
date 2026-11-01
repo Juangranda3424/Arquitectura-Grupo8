@@ -1,0 +1,20 @@
+<%--
+    Barra superior compartida (identidad EurekaBank · GR8).
+    Requiere el taglib "c" declarado en la página que la incluye.
+--%>
+<header class="navbar">
+    <a class="navbar-brand" href="${pageContext.request.contextPath}/Home">
+        <svg class="logo-mark" viewBox="0 0 48 48" role="img" aria-label="EurekaBank">
+            <rect x="1.5" y="1.5" width="45" height="45" rx="13" fill="#0FA3B1" stroke="#F2A541" stroke-width="3"/>
+            <path d="M17 13h16v5H22v4h10v5H22v6h11v5H17z" fill="#FFFFFF"/>
+        </svg>
+        <span class="brand-text">
+            <span class="brand-name">EurekaBank</span>
+            <span class="brand-sub">Grupo 8 · Arquitectura de Software</span>
+        </span>
+    </a>
+    <div class="navbar-user">
+        <span>Usuario: <span class="user-name"><c:out value="${sessionScope.username}"/></span></span>
+        <a href="${pageContext.request.contextPath}/Logout" class="btn-logout">Salir</a>
+    </div>
+</header>
