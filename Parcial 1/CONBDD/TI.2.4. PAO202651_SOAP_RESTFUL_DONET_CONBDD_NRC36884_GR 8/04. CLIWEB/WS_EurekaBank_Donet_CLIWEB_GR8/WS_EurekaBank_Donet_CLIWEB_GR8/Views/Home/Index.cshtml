@@ -1,0 +1,46 @@
+@{
+    ViewData["Title"] = "Menú principal";
+    var usuario = ViewData["Usuario"] as string;
+}
+
+<section class="page-head">
+    <h1>Bienvenido, @usuario</h1>
+    <p>Seleccione una operación para continuar.</p>
+</section>
+
+<div class="card">
+    <h2 class="card-title">Operaciones disponibles</h2>
+    <p class="card-subtitle">Todas las operaciones se registran en el servidor WS_EurekaBank_Donet_GR8.</p>
+
+    <div class="menu-grid">
+        <a class="menu-card" asp-controller="Deposito" asp-action="Index">
+            <h3>Depósito</h3>
+            <p>Registrar un depósito en una cuenta.</p>
+            <span>Abrir →</span>
+        </a>
+
+        <a class="menu-card" asp-controller="Retiro" asp-action="Index">
+            <h3>Retiro</h3>
+            <p>Registrar un retiro de una cuenta.</p>
+            <span>Abrir →</span>
+        </a>
+
+        <a class="menu-card" asp-controller="Transferencia" asp-action="Index">
+            <h3>Transferencia</h3>
+            <p>Transferir un monto entre dos cuentas.</p>
+            <span>Abrir →</span>
+        </a>
+
+        <a class="menu-card" asp-controller="Movimiento" asp-action="Index">
+            <h3>Movimientos</h3>
+            <p>Consultar el historial y los totales.</p>
+            <span>Abrir →</span>
+        </a>
+
+        <a class="menu-card" asp-controller="Cuenta" asp-action="Index">
+            <h3>Datos de cuenta</h3>
+            <p>Consultar la información de una cuenta.</p>
+            <span>Abrir →</span>
+        </a>
+    </div>
+</div>

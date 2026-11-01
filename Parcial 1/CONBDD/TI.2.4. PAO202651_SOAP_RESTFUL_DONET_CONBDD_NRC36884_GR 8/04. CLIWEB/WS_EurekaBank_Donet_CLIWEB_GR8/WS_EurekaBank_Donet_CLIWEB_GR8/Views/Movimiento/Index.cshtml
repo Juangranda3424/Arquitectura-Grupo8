@@ -1,0 +1,91 @@
+@model MovimientoViewModel
+@{
+    ViewData["Title"] = "Movimientos";
+    var movimientos = Model.Movimientos;
+}
+
+<section class="page-head">
+    <h1>Movimientos</h1>
+    <p>Consulte el historial y los totales de una cuenta.</p>
+</section>
+
+@if (!string.IsNullOrEmpty(Model.Error))
+{
+    <div class="alert alert-danger">@Model.Error</div>
+}
+
+<div class="card">
+    <form asp-action="Index" method="post">
+        <div class="field">
+            <label class="label" asp-for="Cuenta">Número de cuenta</label>
+            <input class="input" asp-for="Cuenta" placeholder="Ej. 00100001" />
+            <span class="field-error" asp-validation-for="Cuenta"></span>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Consultar movimientos</button>
+        </div>
+    </form>
+</div>
+
+@if (movimientos != null)
+{
+    <div class="stats">
+        <div class="stat">
+            <h4>Saldo actual</h4>
+            <div class="value">S/ @Model.SaldoActual.ToString("N2")</div>
+        </div>
+        <div class="stat">
+            <h4>Ingresos</h4>
+            <div class="value">S/ @Model.TotalIngresos.ToString("N2")</div>
+        </div>
+        <div class="stat">
+            <h4>Egresos</h4>
+            <div class="value">S/ @Model.TotalEgresos.ToString("N2")</div>
+        </div>
+        <div class="stat">
+            <h4>Saldo neto</h4>
+            <div class="value">S/ @Model.SaldoNeto.ToString("N2")</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">Historial de movimientos</h2>
+        <p class="card-subtitle">@movimientos.Count movimiento(s) encontrados.</p>
+
+        @if (movimientos.Count == 0)
+        {
+            <div class="alert alert-danger">No se encontraron movimientos para la cuenta consultada.</div>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nro</th>
+                        <th>Fecha</th>
+                        <th>Tipo</th>
+                        <th>Descripción</th>
+                        <th class="num">Importe</th>
+                        <th>Cta. Ref.</th>
+                        <th class="num">Saldo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var mov in movimientos)
+                    {
+                        <tr>
+                            <td>@mov.NumeroMovimiento</td>
+                            <td>@(string.IsNullOrEmpty(mov.FechaMovimiento) ? "—" : mov.FechaMovimiento)</td>
+                            <td>@mov.CodigoTipoMovimiento</td>
+                            <td>@mov.TipoDescripcion</td>
+                            <td class="num">@mov.ImporteMovimiento.ToString("N2")</td>
+                            <td>@(string.IsNullOrEmpty(mov.CuentaReferencia) ? "—" : mov.CuentaReferencia)</td>
+                            <td class="num">@mov.Saldo.ToString("N2")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+}
