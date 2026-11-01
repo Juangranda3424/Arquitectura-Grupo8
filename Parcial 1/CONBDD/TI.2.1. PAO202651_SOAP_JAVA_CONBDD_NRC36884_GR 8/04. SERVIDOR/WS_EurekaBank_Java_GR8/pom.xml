@@ -46,4 +46,118 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <!--
+            Arranque local con Payara Micro (Jakarta EE 11). Opt-in: no afecta al build normal.
+
+                mvn -Prun package     compila y arranca el servidor en http://localhost:8080
+                mvn -Prun exec:exec   arranca sin recompilar, usando el WAR ya empaquetado
+
+            El arranque cuelga de la fase `package` a proposito: el boton Run de NetBeans
+            ejecuta `package`, asi que con la configuracion `run` elegida en la barra el
+            servidor levanta solo.
+
+            Payara Micro no incluye el runtime de JAX-WS (el WAR se despliega pero los
+            servicios SOAP responden 404). Por eso este perfil agrega dos cosas:
+
+              - `jaxws-rt` como dependencia normal, asi que el RI viaja dentro del WAR
+                (WEB-INF/lib);
+              - `src/run/webapp/WEB-INF/sun-jaxws.xml`, el descriptor que le dice al RI
+                que publique cada servicio en /WSLogin, /WSCuenta y /WSMovimiento.
+
+            El build sin perfil no incluye ninguna de las dos, asi que el WAR normal y un
+            Payara Server o GlassFish completo siguen usando el runtime JAX-WS del servidor.
+
+            Payara Micro se descarga la primera vez desde Maven Central a target/;
+            usa el `java` del PATH, que debe ser JDK 21 (Payara 7 corre sobre Java SE 21).
+        -->
+        <profile>
+            <id>run</id>
+            <properties>
+                <payara.micro.version>7.2026.10</payara.micro.version>
+                <payara.micro.port>8080</payara.micro.port>
+                <payara.micro.jar>${project.build.directory}/payara-micro-${payara.micro.version}.jar</payara.micro.jar>
+                <jaxws.rt.version>4.0.3</jaxws.rt.version>
+            </properties>
+            <dependencies>
+                <!-- Runtime JAX-WS (Metro) para que Payara Micro publique los servicios SOAP -->
+                <dependency>
+                    <groupId>com.sun.xml.ws</groupId>
+                    <artifactId>jaxws-rt</artifactId>
+                    <version>${jaxws.rt.version}</version>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>3.8.1</version>
+                        <executions>
+                            <execution>
+                                <id>copiar-payara-micro</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>fish.payara.extras</groupId>
+                                            <artifactId>payara-micro</artifactId>
+                                            <version>${payara.micro.version}</version>
+                                            <type>jar</type>
+                                            <outputDirectory>${project.build.directory}</outputDirectory>
+                                            <destFileName>payara-micro-${payara.micro.version}.jar</destFileName>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.5.0</version>
+                        <configuration>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-jar</argument>
+                                <argument>${payara.micro.jar}</argument>
+                                <argument>--port</argument>
+                                <argument>${payara.micro.port}</argument>
+                                <argument>--noCluster</argument>
+                                <argument>--rootDir</argument>
+                                <argument>${project.build.directory}/payara-micro</argument>
+                                <argument>--deploy</argument>
+                                <argument>${project.build.directory}/${project.build.finalName}.war</argument>
+                            </arguments>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>arrancar-payara-micro</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>3.3.2</version>
+                        <configuration>
+                            <webResources>
+                                <resource>
+                                    <directory>${project.basedir}/src/run/webapp</directory>
+                                </resource>
+                            </webResources>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
