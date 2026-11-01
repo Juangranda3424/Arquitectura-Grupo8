@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WS_EurekaBank_Java_GR8 · EurekaBank GR8</title>
+    <style>
+        :root {
+            --navy: #0B1F3A;
+            --navy-2: #13315C;
+            --teal: #0FA3B1;
+            --amber: #F2A541;
+            --bg: #F4F6FA;
+            --surface: #FFFFFF;
+            --text: #1E293B;
+            --muted: #64748B;
+            --border: #E2E8F0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        header {
+            background: var(--navy);
+            border-bottom: 4px solid var(--navy-2);
+            padding: 1.25rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+        }
+
+        header .mark { width: 44px; height: 44px; flex: 0 0 44px; }
+        header h1 { color: #fff; font-size: 1.4rem; letter-spacing: 0.02em; }
+        header p { color: #C7D2E0; font-size: 0.78rem; }
+
+        main { max-width: 880px; margin: 2.5rem auto; padding: 0 1.25rem; }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: 0 8px 24px rgba(11, 31, 58, 0.06);
+            margin-bottom: 1.5rem;
+        }
+
+        .eyebrow {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: 0.4rem;
+        }
+
+        h2 { font-size: 1.3rem; color: var(--navy); margin-bottom: 0.5rem; }
+        p.help { color: var(--muted); font-size: 0.92rem; margin-bottom: 1.25rem; }
+
+        ul.services { list-style: none; }
+        ul.services li {
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--teal);
+            border-radius: 8px;
+            padding: 0.9rem 1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+        ul.services strong { color: var(--navy); }
+        ul.services span { color: var(--muted); font-size: 0.85rem; }
+        ul.services a {
+            background: var(--teal);
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0.45rem 0.9rem;
+            border-radius: 8px;
+            white-space: nowrap;
+        }
+        ul.services a:hover { background: #0B848F; }
+
+        footer {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.78rem;
+            padding-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <svg class="mark" viewBox="0 0 48 48" role="img" aria-label="EurekaBank">
+            <rect x="1.5" y="1.5" width="45" height="45" rx="13" fill="#0FA3B1" stroke="#F2A541" stroke-width="3"/>
+            <path d="M17 13h16v5H22v4h10v5H22v6h11v5H17z" fill="#FFFFFF"/>
+        </svg>
+        <div>
+            <h1>EurekaBank</h1>
+            <p>Grupo 8 · Arquitectura de Software · WS_EurekaBank_Java_GR8</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="card">
+            <p class="eyebrow">Servidor SOAP</p>
+            <h2>Servicios web disponibles</h2>
+            <p class="help">
+                Servidor Jakarta EE desplegado en el contexto <strong>/WS_EurekaBank_Java_GR8</strong>.
+                Cada servicio publica su contrato WSDL para que los clientes CLICON, CLIESC, CLIMOV y CLIWEB
+                generen sus stubs.
+            </p>
+
+            <ul class="services">
+                <li>
+                    <div>
+                        <strong>WSLogin</strong>
+                        <span> · autenticación de usuarios del sistema</span>
+                    </div>
+                    <a href="WSLogin?wsdl">Ver WSDL</a>
+                </li>
+                <li>
+                    <div>
+                        <strong>WSCuenta</strong>
+                        <span> · depósitos, retiros, transferencias y datos de cuenta</span>
+                    </div>
+                    <a href="WSCuenta?wsdl">Ver WSDL</a>
+                </li>
+                <li>
+                    <div>
+                        <strong>WSMovimiento</strong>
+                        <span> · consulta de movimientos por cuenta</span>
+                    </div>
+                    <a href="WSMovimiento?wsdl">Ver WSDL</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <p class="eyebrow">Configuración</p>
+            <h2>Base de datos</h2>
+            <p class="help">
+                Esquema y datos en <strong>03. BDD/crearbd.sql</strong> (MySQL, base <strong>eurekabank</strong>).
+                Credenciales del datasource en <strong>ec.edu.monster.db.AccesoBD</strong>.
+            </p>
+        </div>
+    </main>
+
+    <footer>EurekaBank · Grupo 8 · Servicios web SOAP sobre Jakarta EE</footer>
+</body>
+</html>

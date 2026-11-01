@@ -1,0 +1,31 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Identidad EurekaBank · GR8: navy de cabecera, teal de acento -->
+    <style name="Base.Theme.WS_EurekaBank_Java_CLIMOV_GR8" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/gr8_teal</item>
+        <item name="colorPrimaryVariant">@color/gr8_teal_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/gr8_amber</item>
+        <item name="colorOnSecondary">@color/gr8_navy</item>
+        <item name="colorSurface">@color/gr8_surface</item>
+        <item name="colorOnSurface">@color/gr8_text</item>
+        <item name="android:colorBackground">@color/gr8_bg</item>
+        <item name="android:statusBarColor">@color/gr8_navy</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="Theme.WS_EurekaBank_Java_CLIMOV_GR8" parent="Base.Theme.WS_EurekaBank_Java_CLIMOV_GR8" />
+
+    <!-- Estilo personalizado para TextInputLayout con hints legibles -->
+    <style name="TextInputLayoutDarkHint" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintTextColor">@color/gr8_muted</item>
+        <item name="boxStrokeColor">@color/input_focus</item>
+        <item name="android:textColorHint">@color/gr8_muted</item>
+    </style>
+
+    <!-- Estilo personalizado para TextInputEditText -->
+    <style name="TextInputEditTextBlack" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="android:textColor">@color/gr8_text</item>
+        <item name="android:textColorHint">@color/gr8_muted</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+</resources>

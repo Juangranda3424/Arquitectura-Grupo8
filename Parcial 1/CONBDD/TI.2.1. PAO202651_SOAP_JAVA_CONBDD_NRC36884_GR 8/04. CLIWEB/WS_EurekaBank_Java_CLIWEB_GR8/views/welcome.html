@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/eureka.css">
+    <title>Bienvenido - EurekaBank · GR8</title>
+    <script>
+        function goToAccount() { window.location.href = '/cuenta'; }
+        function goToMovements() { window.location.href = '/movimiento'; }
+    </script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="/home" class="navbar-brand">
+            <svg class="logo-mark" viewBox="0 0 48 48" role="img" aria-label="EurekaBank">
+                <rect x="1.5" y="1.5" width="45" height="45" rx="13" fill="#0FA3B1" stroke="#F2A541" stroke-width="3"/>
+                <path d="M17 13h16v5H22v4h10v5H22v6h11v5H17z" fill="#FFFFFF"/>
+            </svg>
+            <span class="brand-text">
+                <span class="brand-name">EurekaBank</span>
+                <span class="brand-sub">Grupo 8 · Arquitectura de Software</span>
+            </span>
+        </a>
+        <div class="navbar-user">
+            <a href="/login" class="btn-logout">Regresar al login</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <div class="page-head">
+                <p class="page-eyebrow">Bienvenido</p>
+                <h1 class="page-title">EurekaBank · GR8</h1>
+                <p class="page-help">Selecciona la operación que deseas realizar.</p>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <h3>Gestionar operaciones</h3>
+                    <p>Depositar, retirar o transferir entre cuentas.</p>
+                    <div class="form-actions" style="text-align: left; margin-top: 1rem;">
+                        <button class="btn btn-primary" style="width: auto;" onclick="goToAccount()">Ir a gestionar operaciones</button>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <h3>Movimientos</h3>
+                    <p>Consulta movimientos y resumen de una cuenta.</p>
+                    <div class="form-actions" style="text-align: left; margin-top: 1rem;">
+                        <button class="btn btn-primary" style="width: auto;" onclick="goToMovements()">Ver movimientos</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
