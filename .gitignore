@@ -1,0 +1,22 @@
+# Reference projects with database that Parcial 1/CONBDD replicates (not versioned)
+proys_with_bdd/
+
+# ---------------------------------------------------------------------------
+# Parcial 1 / CONBDD - generated build artifacts and local IDE state
+# ---------------------------------------------------------------------------
+Parcial 1/CONBDD/**/target/
+Parcial 1/CONBDD/**/node_modules/
+Parcial 1/CONBDD/**/bin/
+Parcial 1/CONBDD/**/obj/
+Parcial 1/CONBDD/**/.vs/
+Parcial 1/CONBDD/**/packages/
+Parcial 1/CONBDD/**/*.user
+Parcial 1/CONBDD/**/nbproject/private/
+Parcial 1/CONBDD/**/.gradle/
+Parcial 1/CONBDD/**/build/
+Parcial 1/CONBDD/**/.idea/
+Parcial 1/CONBDD/**/.kotlin/
+Parcial 1/CONBDD/**/local.properties
+Parcial 1/CONBDD/**/*.iml
+Parcial 1/CONBDD/**/.cxx/
+Parcial 1/CONBDD/**/captures/
