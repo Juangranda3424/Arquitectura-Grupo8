@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - EurekaBank GR8</title>
+    <link rel="icon" type="image/svg+xml" href="~/img/logo-eureka.svg" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header class="cabecera">
+        <div class="marca">
+            <!-- Logotipo vectorial: monograma "E" en cuadrado redondeado -->
+            <img class="logo" src="~/img/logo-eureka.svg" alt="Logotipo EurekaBank" />
+            <div class="marca-texto">
+                <h1>EurekaBank</h1>
+                <p>Grupo 8 · Arquitectura de Software</p>
+            </div>
+        </div>
+        <div class="cabecera-derecha">
+            <span class="chip">TI.2.2 · SOAP .NET</span>
+            @if (ViewData["Usuario"] is string usuario && !string.IsNullOrEmpty(usuario))
+            {
+                <form asp-controller="Autenticacion" asp-action="Logout" method="post" class="sesion">
+                    <span class="sesion-usuario">@usuario</span>
+                    <button type="submit" class="btn-salir">Cerrar sesión</button>
+                </form>
+            }
+        </div>
+    </header>
+
+    <main class="contenedor">
+        @RenderBody()
+    </main>
+
+    <footer class="pie">
+        <span>WS_EurekaBank_Donet_GR8 · endpoint WSEureka.svc</span>
+    </footer>
+</body>
+</html>

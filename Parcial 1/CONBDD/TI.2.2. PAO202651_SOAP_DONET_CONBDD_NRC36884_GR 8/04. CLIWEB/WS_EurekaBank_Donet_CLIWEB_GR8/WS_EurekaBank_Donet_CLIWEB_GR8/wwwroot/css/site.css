@@ -1,4 +1,4 @@
-/* ec.edu.monster.vista/styles.css
+/* wwwroot/css/site.css
    Identidad visual compartida de EurekaBank · Grupo 8 (TI.2.2 SOAP .NET) */
 
 :root {
@@ -70,6 +70,12 @@ body {
     color: #C7D2E0;
 }
 
+.cabecera-derecha {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
 .chip {
     padding: 6px 14px;
     border: 1px solid rgba(255, 255, 255, 0.28);
@@ -78,6 +84,34 @@ body {
     letter-spacing: 0.5px;
     color: var(--ambar);
     white-space: nowrap;
+}
+
+.sesion {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+}
+
+.sesion-usuario {
+    font-size: 13.5px;
+    color: #C7D2E0;
+}
+
+.btn-salir {
+    padding: 7px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 8px;
+    background: transparent;
+    color: #FFFFFF;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.18s ease;
+}
+
+.btn-salir:hover {
+    background: rgba(255, 255, 255, 0.16);
 }
 
 .contenedor {
@@ -94,6 +128,11 @@ body {
     border-radius: var(--radio);
     padding: 28px;
     box-shadow: 0 10px 30px rgba(11, 31, 58, 0.08);
+}
+
+.tarjeta-angosta {
+    max-width: 460px;
+    margin: 0 auto;
 }
 
 .tarjeta h2 {
@@ -143,6 +182,7 @@ select:focus {
 }
 
 .boton {
+    display: block;
     margin-top: 22px;
     padding: 12px 18px;
     border: none;
@@ -152,6 +192,8 @@ select:focus {
     font-family: inherit;
     font-size: 15px;
     font-weight: 600;
+    text-align: center;
+    text-decoration: none;
     cursor: pointer;
     transition: background 0.18s ease, transform 0.12s ease;
 }
@@ -181,6 +223,7 @@ select:focus {
 }
 
 .enlace {
+    display: inline-block;
     margin-top: 20px;
     padding: 0;
     border: none;
@@ -208,14 +251,36 @@ select:focus {
     color: var(--exito);
 }
 
-.mensaje.error {
-    color: var(--error);
-}
-
 .nota {
     margin: 12px 0 0;
     font-size: 12.5px;
     color: var(--atenuado);
+}
+
+.alerta {
+    margin: 0 0 12px;
+    padding: 11px 14px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+}
+
+.alerta-error {
+    background: #FEE2E2;
+    border: 1px solid #FECACA;
+    color: #991B1B;
+}
+
+.alerta-exito {
+    background: #DCFCE7;
+    border: 1px solid #BBF7D0;
+    color: #166534;
+}
+
+.error-campo {
+    min-height: 0;
+    font-size: 12.5px;
+    color: var(--error);
 }
 
 .grupo {
