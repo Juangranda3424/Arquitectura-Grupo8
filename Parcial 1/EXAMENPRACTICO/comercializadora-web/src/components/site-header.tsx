@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { authClient } from "@/lib/auth-client";
 
@@ -17,15 +16,16 @@ const NAV = [
 ];
 
 export function SiteHeader() {
-  const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
   const [isSigningOut, startSignOut] = useTransition();
 
   const handleSignOut = () => {
     startSignOut(async () => {
       await authClient.signOut();
-      router.replace("/login");
-      router.refresh();
+      // Full navigation: the client router may hold a cached redirect taken by
+      // src/proxy.ts while signed in.
+      // eslint-disable-next-line @next/next/no-location-assign-relative-destination -- full reload drops the cached proxy redirect
+      window.location.assign("/login");
     });
   };
 

@@ -1,12 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { authClient } from "@/lib/auth-client";
 
 export default function RegistroPage() {
-  const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,8 +32,10 @@ export default function RegistroPage() {
       return;
     }
 
-    router.replace("/");
-    router.refresh();
+    // Full navigation: the client router may hold a cached redirect to /login
+    // taken by src/proxy.ts before the session cookie existed.
+    // eslint-disable-next-line @next/next/no-location-assign-relative-destination -- full reload drops the cached proxy redirect
+    window.location.assign("/");
   };
 
   return (
