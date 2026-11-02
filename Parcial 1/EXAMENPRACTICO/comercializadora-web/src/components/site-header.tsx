@@ -10,6 +10,12 @@ import { authClient } from "@/lib/auth-client";
  * the browser through the Better Auth client (no server side cookie read, so
  * pages stay static and nothing needs a Suspense boundary).
  */
+const NAV = [
+  { href: "/catalogo", label: "Catálogo" },
+  { href: "/facturacion", label: "Facturación" },
+  { href: "/facturas", label: "Facturas" },
+];
+
 export function SiteHeader() {
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
@@ -35,12 +41,15 @@ export function SiteHeader() {
           </Link>
 
           <nav className="flex items-center gap-1 text-sm">
-            <Link
-              href="/catalogo"
-              className="rounded-md px-2 py-1 font-medium text-zinc-600 transition-colors hover:bg-zinc-100"
-            >
-              Catálogo
-            </Link>
+            {NAV.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="rounded-md px-2 py-1 font-medium text-zinc-600 transition-colors hover:bg-zinc-100"
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
         </div>
 

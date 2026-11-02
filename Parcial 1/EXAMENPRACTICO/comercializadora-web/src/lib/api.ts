@@ -12,6 +12,24 @@ interface NestErrorBody {
   message?: string | string[];
 }
 
+/**
+ * Error thrown by `apiRequest`, with the API's body kept.
+ *
+ * The invoicing screen needs more than the message: a rejected credit comes
+ * with the bank's `motivos` and its `montoMaximo`, which the UI shows as a
+ * list. Everything else can keep using `errorMessage`.
+ */
+export class ApiError extends Error {
+  constructor(
+    message: string,
+    readonly status: number,
+    readonly body: unknown,
+  ) {
+    super(message);
+    this.name = "ApiError";
+  }
+}
+
 /** Turns the `message` of a NestJS error into one line for the UI. */
 function readMessage(body: unknown, status: number): string {
   const message = (body as NestErrorBody | null)?.message;
@@ -43,7 +61,11 @@ export async function apiRequest<T>(
   const body = parseJson(text);
 
   if (!response.ok) {
-    throw new Error(readMessage(body, response.status));
+    throw new ApiError(
+      readMessage(body, response.status),
+      response.status,
+      body,
+    );
   }
 
   return body as T;

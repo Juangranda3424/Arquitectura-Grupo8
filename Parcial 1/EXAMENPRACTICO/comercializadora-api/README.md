@@ -49,6 +49,7 @@ Every variable is optional and has a documented default in
 | `BETTER_AUTH_URL` | `http://localhost:3000` | Public URL of the Next.js app (used to build the auth URLs) |
 | `BETTER_AUTH_SECRET` | `dev-only-insecure-secret-change-me-32chars` (**dev only**) | Signs the session cookies |
 | `WEB_ORIGIN` | `http://localhost:3000` | Origin trusted by Better Auth |
+| `BANQUITO_URL` | `http://localhost:8080` | Base URL of the BanQuito Core (Spring Boot) REST API |
 
 ### Database migrations
 
@@ -112,7 +113,55 @@ decimals), `404` for an unknown id and `409` when marca + modelo already exist
 
 Money columns are NUMERIC(10,2); `src/database/numeric.transformer.ts` returns
 them as numbers with 2 decimals instead of the strings `pg` produces.
-`src/facturacion/` holds the invoicing entities that T7 uses (no endpoints yet).
+
+### Invoicing and credit (S11, S12)
+
+`src/facturacion/` issues the sales and shows the amortization table of a
+credit. Every credit decision belongs to the BanQuito core: `src/banquito/` is
+its HTTP client (`BANQUITO_URL`, 5 second timeout, global `fetch`) and the
+invoicing service only translates the bank's answer into an invoice.
+
+| Route | Effect |
+|---|---|
+| `GET /api/credito/evaluacion?cedula=X&codCelular=N` | bank verdict for the "Verificar crédito" step: `{ cedula, codCliente, nombre, sujetoCredito, motivos, montoMaximo, precio, aprobable }` |
+| `POST /api/facturas` | issues one invoice (`201`) for one phone, in cash or on credit |
+| `GET /api/facturas` | invoices, newest first; `?cedula=` filters one buyer |
+| `GET /api/facturas/:num` | one invoice with its customer and phone lines |
+| `GET /api/facturas/:num/amortizacion` | the bank's amortization table of a credit invoice |
+
+Rules:
+
+- **Efectivo (`EFE`)**: `descuento = 42%` of the phone price rounded HALF_UP to
+  cents and `total = subtotal - descuento` (229.00 -> 96.18 / 132.82;
+  999.00 -> 419.58 / 579.42). `cod_credito` stays `null` and the bank is never
+  called.
+- **Crédito directo (`CRE`)**: `numeroCuotas` is required and must be 3..18
+  (`400`). The service asks the bank whether the cédula is a credit subject
+  (`422` with the bank's `motivos` otherwise, nothing stored), then for the
+  maximum amount (`422` with `montoMaximo` when the price is above it, nothing
+  stored), and only then grants the credit (`POST /api/creditos`). The invoice
+  is stored afterwards with `cod_credito`, `num_cuotas` and `valor_cuota`,
+  `descuento = 0` and `total = precio`.
+- The buyer is upserted in `cliente` by cédula (10 digits), so a repeated sale
+  reuses the row instead of duplicating the customer.
+- Unknown phone: `404`. Deactivated phone: `400`. Unknown invoice: `404`.
+  Amortization of a cash invoice: `409`.
+- The core is a hard dependency: when it cannot be reached (or answers 5xx)
+  the API answers `502 { statusCode, message: "El servicio del Banco BanQuito no
+  está disponible" }`. Any other 4xx of the bank is relayed with its own
+  status, `codigo` and `mensaje`.
+
+> **No compensation.** If the bank grants the credit and storing the invoice
+> then fails, the core has no endpoint to undo the credit: the API logs the
+> granted `cod_credito`, the cédula, the price and the number of quotas at
+> `error` level and answers the storage error. That credit stays active in the
+> bank (a later credit for the same client is rejected with the `CREDITO_ACTIVO`
+> motivo) and the case has to be fixed by hand.
+
+`npm test` covers the credit path with unit tests of the service and a mocked
+`BanquitoClient` (`src/facturacion/facturacion.service.spec.ts`), plus an
+integration spec for the cash flow against the docker database
+(`test/facturas.e2e-spec.ts`) that never grants credits in the core.
 
 ## Project setup
 

@@ -1,7 +1,12 @@
 import type { ValueTransformer } from 'typeorm';
 
-/** Rounds to 2 decimals, killing the binary noise of the float conversion. */
-function round2(value: number): number {
+/**
+ * Rounds to 2 decimals (HALF_UP for positive amounts), killing the binary
+ * noise of the float conversion. It is also what the invoicing module uses for
+ * the 42% cash discount (S11), so the amount stored and the amount shown are
+ * computed the same way.
+ */
+export function round2(value: number): number {
   return Math.round((value + Number.EPSILON) * 100) / 100;
 }
 

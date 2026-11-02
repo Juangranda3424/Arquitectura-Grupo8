@@ -1,19 +1,28 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { BanquitoModule } from '../banquito/banquito.module.js';
+import { Celular } from '../catalogo/celular.entity.js';
 import { Cliente } from './cliente.entity.js';
+import { CreditoController } from './credito.controller.js';
 import { DetalleFactura } from './detalle-factura.entity.js';
 import { Factura } from './factura.entity.js';
+import { FacturasController } from './facturas.controller.js';
+import { FacturacionService } from './facturacion.service.js';
 
 /**
- * Invoicing model (S11): `cliente`, `factura` and `detalle_factura`.
+ * Invoicing model (S11) and the amortization view (S12): `cliente`, `factura`
+ * and `detalle_factura` (tables created by the `RetailerSchema` migration),
+ * plus the credit evaluation the invoicing screen needs.
  *
- * T6 creates the tables and their entities because the catalog migration owns
- * the whole retailer schema; the invoicing endpoints and the BanQuito calls
- * arrive in T7 and only have to add their own service and controller to this
- * module. Registering the entities now keeps TypeORM aware of them (and of
- * their relations) instead of leaving the mappings untested until later.
+ * `Celular` is registered here too because an invoice reads the phone price
+ * from the catalog, and `BanquitoModule` provides the client of the core.
  */
 @Module({
-  imports: [TypeOrmModule.forFeature([Cliente, Factura, DetalleFactura])],
+  imports: [
+    TypeOrmModule.forFeature([Cliente, Factura, DetalleFactura, Celular]),
+    BanquitoModule,
+  ],
+  controllers: [CreditoController, FacturasController],
+  providers: [FacturacionService],
 })
 export class FacturacionModule {}

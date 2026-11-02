@@ -22,6 +22,11 @@ export const ENV_DEFAULTS = {
   BETTER_AUTH_SECRET: 'dev-only-insecure-secret-change-me-32chars',
   /** Origin allowed to call the auth endpoints from a browser. */
   WEB_ORIGIN: 'http://localhost:3000',
+  /**
+   * Base URL of the BanQuito Core (Spring Boot) REST API. The invoicing module
+   * calls it for every credit decision and for the amortization table.
+   */
+  BANQUITO_URL: 'http://localhost:8080',
 } as const;
 
 export type EnvKey = keyof typeof ENV_DEFAULTS;
