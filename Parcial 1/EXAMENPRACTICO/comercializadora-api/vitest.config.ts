@@ -7,6 +7,8 @@ export default defineConfig({
   test: {
     globals: true,
     root: './',
-    include: ['**/*.spec.ts'],
+    // The auth spec is an integration test against the docker-compose
+    // PostgreSQL, so `npm test` and `npm run test:e2e` run the same files here.
+    include: ['**/*.spec.ts', '**/*.e2e-spec.ts'],
   },
 });

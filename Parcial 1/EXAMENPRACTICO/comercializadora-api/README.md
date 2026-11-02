@@ -25,6 +25,70 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Retailer API (examen practice)
+
+Backend of the phone retailer: TypeORM over its own PostgreSQL database
+(`comercializadora`) and Better Auth for the seller sessions. It listens on
+port **3001**; the browser only talks to the Next.js app on port 3000, which
+rewrites `/api/*` here (see `comercializadora-web/next.config.ts`).
+
+```bash
+docker compose up -d   # PostgreSQL, from the parent folder
+npm run start          # or: npm run build && node dist/main
+```
+
+### Environment
+
+Every variable is optional and has a documented default in
+`src/config/env.ts`; copy `.env.example` to `.env` to override them.
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `PORT` | `3001` | Port of this API |
+| `DATABASE_URL` | `postgres://gr8:gr8pass@localhost:5432/comercializadora` | Retailer database |
+| `BETTER_AUTH_URL` | `http://localhost:3000` | Public URL of the Next.js app (used to build the auth URLs) |
+| `BETTER_AUTH_SECRET` | `dev-only-insecure-secret-change-me-32chars` (**dev only**) | Signs the session cookies |
+| `WEB_ORIGIN` | `http://localhost:3000` | Origin trusted by Better Auth |
+
+### Database migrations
+
+TypeORM owns the schema: `synchronize: false`, `migrationsRun: true`, so the
+pending migrations in `src/database/migrations/` are applied when the
+application boots. The CLI scripts build first and then use the compiled
+data source:
+
+```bash
+npm run migration:show     # list migrations and whether they ran
+npm run migration:run      # apply pending migrations
+npm run migration:revert   # revert the last migration
+```
+
+Add a new migration to `src/database/migrations/` and register it in
+`src/database/migrations/index.ts` (the list is imported explicitly instead of
+a glob so the same list works for `dist/`, `nest start` and vitest).
+
+### Authentication
+
+Better Auth with email and password (`/api/auth/*`, default base path). The
+TypeORM migration creates the `user`, `session`, `account` and `verification`
+tables. On bootstrap the API seeds one demo user, idempotently:
+
+```
+vendedor@comercializadora.ec / Vendedor2026!   (Vendedor Demo)
+```
+
+`GET /api/me` returns `{ id, name, email }` of the session user; without a
+session cookie it answers `401` (the global Better Auth guard protects every
+route, add `@AllowAnonymous()` to open one).
+
+`npm test` runs the auth integration spec against the docker database: it only
+adds the rows for the session it signs in.
+
+> `pg` ships no type declarations and this project does not depend on
+> `@types/pg`; `src/types/pg.d.ts` declares the small subset the API calls. If
+> `@types/pg` is added later, delete that file and the cast in
+> `src/auth/auth.ts`.
+
 ## Project setup
 
 ```bash
