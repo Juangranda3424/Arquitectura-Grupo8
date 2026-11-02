@@ -1,0 +1,47 @@
+# PostgreSQL for the practical exam (BanQuito Core + phone retailer).
+#
+#   docker compose up -d        # first run creates both databases
+#   docker compose down         # stop (data is kept in the named volume)
+#   docker compose down -v      # stop and wipe all data (next "up" re-creates it)
+#
+# localhost:5432  user gr8 / gr8pass
+#   banquito          -> schema and seed data are created by Flyway when banquito-core starts
+#   comercializadora  -> created empty on the first run; comercializadora-api runs its TypeORM migrations
+
+name: examen-celulares
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: examen-celulares-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: gr8
+      POSTGRES_PASSWORD: gr8pass
+      POSTGRES_DB: banquito
+      TZ: America/Guayaquil
+      PGTZ: America/Guayaquil
+    command:
+      - postgres
+      - -c
+      - shared_buffers=32MB
+      - -c
+      - max_connections=40
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      # Init scripts run once, in name order, only while the data volume is empty.
+      - ./docker/postgres/01-create-comercializadora.sql:/docker-entrypoint-initdb.d/01-create-comercializadora.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gr8 -d banquito"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+volumes:
+  pg_data:
