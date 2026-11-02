@@ -26,12 +26,23 @@ export function SiteHeader() {
   return (
     <header className="border-b border-zinc-200 bg-white">
       <div className="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-4">
-        <Link
-          href="/"
-          className="text-base font-semibold tracking-tight text-zinc-900"
-        >
-          Comercializadora de Celulares
-        </Link>
+        <div className="flex flex-wrap items-center gap-5">
+          <Link
+            href="/"
+            className="text-base font-semibold tracking-tight text-zinc-900"
+          >
+            Comercializadora de Celulares
+          </Link>
+
+          <nav className="flex items-center gap-1 text-sm">
+            <Link
+              href="/catalogo"
+              className="rounded-md px-2 py-1 font-medium text-zinc-600 transition-colors hover:bg-zinc-100"
+            >
+              Catálogo
+            </Link>
+          </nav>
+        </div>
 
         <div className="flex items-center gap-3 text-sm">
           {session ? (

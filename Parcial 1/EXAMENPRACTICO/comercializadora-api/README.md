@@ -89,6 +89,31 @@ adds the rows for the session it signs in.
 > `@types/pg` is added later, delete that file and the cast in
 > `src/auth/auth.ts`.
 
+### Phone catalog
+
+`RetailerSchema` creates the retailer model — `celular`, `cliente`, `factura`
+and `detalle_factura` — and inserts the six phones of the exam statement.
+`src/catalogo/` exposes their maintenance (every route needs a session and
+answers `401` without one):
+
+| Route | Effect |
+|---|---|
+| `GET /api/celulares` | phones on sale; `?todos=true` also lists the inactive ones |
+| `GET /api/celulares/:id` | one phone |
+| `POST /api/celulares` | creates a phone (`201`) |
+| `PUT /api/celulares/:id` | replaces marca, modelo, descripcion and precio |
+| `DELETE /api/celulares/:id` | soft delete: `activo = false` (invoices reference the phone) |
+| `PATCH /api/celulares/:id/activar` | brings a soft deleted phone back |
+
+Errors are the Nest defaults, `{ statusCode, message }`: `400` for an invalid
+body (marca 1-50, modelo 1-100, descripcion up to 255, precio > 0 with 2
+decimals), `404` for an unknown id and `409` when marca + modelo already exist
+(`uq_celular_marca_modelo`).
+
+Money columns are NUMERIC(10,2); `src/database/numeric.transformer.ts` returns
+them as numbers with 2 decimals instead of the strings `pg` produces.
+`src/facturacion/` holds the invoicing entities that T7 uses (no endpoints yet).
+
 ## Project setup
 
 ```bash

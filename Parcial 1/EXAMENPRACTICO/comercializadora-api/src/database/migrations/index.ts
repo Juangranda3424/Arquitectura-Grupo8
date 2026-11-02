@@ -1,4 +1,5 @@
 import { AuthTables1793580336123 } from './1793580336123-AuthTables.js';
+import { RetailerSchema1793581116108 } from './1793581116108-RetailerSchema.js';
 
 /**
  * Migrations are imported explicitly instead of discovered with a glob.
@@ -8,4 +9,4 @@ import { AuthTables1793580336123 } from './1793580336123-AuthTables.js';
  * list is used by the application, the TypeORM CLI and the tests. Add every
  * new migration here, in timestamp order.
  */
-export const migrations = [AuthTables1793580336123];
+export const migrations = [AuthTables1793580336123, RetailerSchema1793581116108];
