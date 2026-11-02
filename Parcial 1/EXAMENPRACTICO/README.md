@@ -30,6 +30,14 @@ cd comercializadora-web && npm install && npm run dev
 
 Abrir <http://localhost:3000> e ingresar con `vendedor@comercializadora.ec` / `Vendedor2026!`.
 
+Variables de entorno (todas opcionales, con valores por defecto para correr en local):
+
+| Proyecto | Dónde |
+|---|---|
+| `banquito-core` | `src/main/resources/application.properties` (`DB_URL`, `DB_USER`, `DB_PASSWORD`) |
+| `comercializadora-api` | `.env.example` → `.env` (`DATABASE_URL`, `BETTER_AUTH_SECRET`, `BANQUITO_URL`, ...) |
+| `comercializadora-web` | `.env.example` → `.env.local` (`API_URL`) |
+
 ## Datos de prueba del Core
 
 Las fechas de los movimientos se calculan respecto al día en que corre la migración, así las reglas
