@@ -1,0 +1,33 @@
+.textfield.error {
+    -fx-border-color: #c0392b;
+    -fx-border-radius: 4;
+}
+
+#auth-message.hidden {
+    -fx-opacity: 0;
+    -fx-height: 0;
+    -fx-padding: 0;
+}
+
+#auth-message .content {
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000;
+}
+
+#auth-message.error {
+    -fx-background-color: #ffd9d7;
+}
+
+#auth-message.error .content {
+    -fx-fill: #c0392b;
+}
+
+#auth-message.success {
+    -fx-background-color: #acf7d1;
+}
+
+#auth-message.success .content {
+    -fx-fill: #16a085;
+}
+
+

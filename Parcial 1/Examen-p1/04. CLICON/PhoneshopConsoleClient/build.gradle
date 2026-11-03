@@ -1,0 +1,42 @@
+plugins {
+    id "application"
+}
+
+application {
+    mainClass = 'ec.edu.monster.phoneshop.Main'
+}
+
+group = 'ec.edu.monster.phoneshop'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly("org.projectlombok:lombok:1.18.36")
+    annotationProcessor 'org.projectlombok:lombok:1.18.36'
+    implementation 'io.github.openfeign:feign-core:13.5'
+    implementation("io.github.openfeign:feign-okhttp:13.5")
+    implementation("io.github.openfeign:feign-gson:13.5")
+    implementation("io.github.openfeign:feign-slf4j:13.1")
+    implementation("org.jline:jline:3.27.1")
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+jar {
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+
+    manifest {
+        attributes "Main-Class": "ec.edu.monster.phoneshop.Main"
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}

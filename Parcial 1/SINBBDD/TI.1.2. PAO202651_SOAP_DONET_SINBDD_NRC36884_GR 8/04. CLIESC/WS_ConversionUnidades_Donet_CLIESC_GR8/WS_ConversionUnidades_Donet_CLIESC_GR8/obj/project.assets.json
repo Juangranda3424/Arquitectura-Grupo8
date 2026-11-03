@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\JUAN\\Downloads\\WS_ConversionUnidades_Donet_CLIESC_GR8\\WS_ConversionUnidades_Donet_CLIESC_GR8\\WS_ConversionUnidades_Donet_CLIESC_GR8\\WS_ConversionUnidades_Donet_CLIESC_GR8.csproj",
+      "projectUniqueName": "C:\\Users\\JUAN\\Desktop\\ESPE\\Arquitectura-Grupo8\\Arquitectura-Grupo8\\Parcial 1\\SINBBDD\\TI.1.2. PAO202651_SOAP_DONET_SINBDD_NRC36884_GR 8\\04. CLIESC\\WS_ConversionUnidades_Donet_CLIESC_GR8\\WS_ConversionUnidades_Donet_CLIESC_GR8\\WS_ConversionUnidades_Donet_CLIESC_GR8.csproj",
       "projectName": "WS_ConversionUnidades_Donet_CLIESC_GR8",
-      "projectPath": "C:\\Users\\JUAN\\Downloads\\WS_ConversionUnidades_Donet_CLIESC_GR8\\WS_ConversionUnidades_Donet_CLIESC_GR8\\WS_ConversionUnidades_Donet_CLIESC_GR8\\WS_ConversionUnidades_Donet_CLIESC_GR8.csproj",
+      "projectPath": "C:\\Users\\JUAN\\Desktop\\ESPE\\Arquitectura-Grupo8\\Arquitectura-Grupo8\\Parcial 1\\SINBBDD\\TI.1.2. PAO202651_SOAP_DONET_SINBDD_NRC36884_GR 8\\04. CLIESC\\WS_ConversionUnidades_Donet_CLIESC_GR8\\WS_ConversionUnidades_Donet_CLIESC_GR8\\WS_ConversionUnidades_Donet_CLIESC_GR8.csproj",
       "packagesPath": "C:\\Users\\JUAN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\JUAN\\Downloads\\WS_ConversionUnidades_Donet_CLIESC_GR8\\WS_ConversionUnidades_Donet_CLIESC_GR8\\WS_ConversionUnidades_Donet_CLIESC_GR8\\obj\\",
+      "outputPath": "C:\\Users\\JUAN\\Desktop\\ESPE\\Arquitectura-Grupo8\\Arquitectura-Grupo8\\Parcial 1\\SINBBDD\\TI.1.2. PAO202651_SOAP_DONET_SINBDD_NRC36884_GR 8\\04. CLIESC\\WS_ConversionUnidades_Donet_CLIESC_GR8\\WS_ConversionUnidades_Donet_CLIESC_GR8\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -77,7 +77,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\11.0.100-rc.2.26504.105/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\11.0.100-rc.3.26522.148/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",

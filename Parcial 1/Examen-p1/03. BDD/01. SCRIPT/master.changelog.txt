@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro
+        http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+    <property name="REFERENCE_NUMBER_GENERATED_TYPE" value="VARCHAR(255) GENERATED ALWAYS AS (LPAD(number::TEXT, 10, '0')) STORED" dbms="postgresql"/>
+
+    <include file="db.changelog.xml" relativeToChangelogFile="true"/>
+
+    <changeSet id="cs-references-type" author="">
+        <sql dbms="postgresql" endDelimiter="\n;">
+            ALTER TABLE movements DROP COLUMN reference;
+            ALTER TABLE movements ADD COLUMN reference VARCHAR(10) GENERATED ALWAYS AS (LPAD(number::TEXT, 10, '0')) STORED;
+
+            ALTER TABLE bank_accounts DROP COLUMN reference;
+            ALTER TABLE bank_accounts ADD COLUMN reference VARCHAR(10) GENERATED ALWAYS AS (LPAD(number::TEXT, 10, '0')) STORED;
+        </sql>
+    </changeSet>
+</databaseChangeLog>
