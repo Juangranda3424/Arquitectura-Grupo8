@@ -1,0 +1,16 @@
+services:
+  postgres-banquito:
+    image: postgres:15-alpine
+    container_name: postgres_banquito
+    environment:
+      POSTGRES_DB: banquito
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata_banquito:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  pgdata_banquito:

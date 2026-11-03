@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default.html}">
+<head>
+    <title>Inicio</title>
+</head>
+<body>
+    <main layout:fragment="content">
+        <!-- Alertas de éxito y error -->
+        <div th:if="${fsuccess}" class="alert alert-success shadow-sm border-0 mb-4" role="alert" th:text="${fsuccess}"></div>
+        <div th:if="${ferror}" class="alert alert-danger shadow-sm border-0 mb-4" role="alert" th:text="${ferror}"></div>
+
+        <!-- Productos Disponibles -->
+        <div class="user-movements">
+            <h2><i class="fa-solid fa-mobile-screen-button me-2 text-primary"></i>Productos disponibles</h2>
+            <div class="table-responsive">
+                <table class="table align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Imagen</th>
+                            <th scope="col" class="text-end">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="product, index : ${products}">
+                            <form method="post" action="/updatePhone">
+                                <th scope="row" th:text="${index.count}"></th>
+                                <td>
+                                    <input type="hidden" name="id" th:value="${product.id}">
+                                    <input type="text" class="form-control form-control-sm" name="name" th:value="${product.name}">
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control form-control-sm" step=".01" name="price" th:value="${product.price}">
+                                </td>
+                                <td>
+                                    <img th:src="${product.image}" class="rounded border shadow-sm" width="60" height="60" style="object-fit: contain;" />
+                                    <input type="hidden" name="image" th:value="${product.image}">
+                                </td>
+                                <td class="text-end">
+                                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square me-1"></i>Actualizar</button>
+                                </td>
+                            </form>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Verificar Crédito -->
+            <div class="col-lg-6">
+                <div class="transaction-form h-100">
+                    <h3><i class="fa-solid fa-credit-card me-2 text-primary"></i>Verificar Crédito</h3>
+
+                    <div th:if="${creditMessage}" class="alert alert-danger mt-2 mb-3 border-0 shadow-sm" role="alert" th:text="${creditMessage}"></div>
+                    <div th:if="${creditMaxAmount}" class="alert alert-info mt-2 mb-3 border-0 shadow-sm" role="alert">
+                        <i class="fa-solid fa-circle-info me-1"></i> Tienes un monto máximo de <strong th:text="${creditMaxAmount}"></strong>
+                    </div>
+
+                    <form method="POST" action="/checkCredit">
+                        <div class="mb-3">
+                            <label for="amount" class="form-label fw-medium">Monto a verificar</label>
+                            <input type="number" class="form-control" id="amount" name="amount" placeholder="Ej. 500" required>
+                        </div>
+                        <div class="d-flex flex-row justify-content-end mt-4">
+                            <!--/*@thymesVar id="authenticatedUser" type="ec.edu.monster.phoneshop.dto.UserDto"*/-->
+                            <input type="hidden" name="identificationNumber" th:value="${authenticatedUser.identificationNumber}">
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass me-1"></i>Verificar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Nueva Compra -->
+            <div class="col-lg-6">
+                <div class="transaction-form h-100">
+                    <h3><i class="fa-solid fa-cart-shopping me-2 text-primary"></i>Nueva Compra</h3>
+
+                    <form method="POST" action="/purchase">
+                        <div class="mb-3">
+                            <label for="productId" class="form-label fw-medium">Producto</label>
+                            <select class="form-select" id="productId" name="productId" required>
+                                <option th:each="product, index : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="method" class="form-label fw-medium">Método de pago</label>
+                            <select class="form-select" id="method" name="method" required>
+                                <option value="CASH">EFECTIVO</option>
+                                <option value="CREDIT">CRÉDITO</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="months" class="form-label fw-medium">Número de meses</label>
+                            <input type="number" class="form-control" id="months" name="months" min="3" max="18" placeholder="Entre 3 y 18" required>
+                        </div>
+                        <div class="d-flex flex-row justify-content-end mt-4">
+                            <!--/*@thymesVar id="authenticatedUser" type="ec.edu.monster.phoneshop.dto.UserDto"*/-->
+                            <input type="hidden" name="identificationNumber" th:value="${authenticatedUser.identificationNumber}">
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check me-1"></i>Realizar operación</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla de Amortización -->
+        <div class="user-movements mt-4">
+            <h2><i class="fa-solid fa-file-invoice-dollar me-2 text-primary"></i>Tabla de amortización</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Valor cuota</th>
+                            <th scope="col">Interés pagado</th>
+                            <th scope="col">Capital pagado</th>
+                            <th scope="col">Saldo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${installments}" th:each="installment, stat : ${installments}">
+                            <th scope="row" th:text="${stat.count}"></th>
+                            <td th:text="${installment.amount}"></td>
+                            <td th:text="${installment.interest}"></td>
+                            <td th:text="${installment.capital}"></td>
+                            <td th:text="${installment.balance}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

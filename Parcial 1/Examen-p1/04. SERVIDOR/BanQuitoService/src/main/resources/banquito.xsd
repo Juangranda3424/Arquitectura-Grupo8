@@ -1,0 +1,232 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://monster.edu.ec/banquito/ws"
+           targetNamespace="http://monster.edu.ec/banquito/ws" elementFormDefault="qualified">
+
+    <xs:element name="getMovementsByIdentificationRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="identification" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getMovementsByIdentificationResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="movements" type="tns:movement" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="checkCreditRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="identification" type="xs:string"/>
+                <xs:element name="amount" type="xs:decimal"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="checkCreditResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="maxAmount" type="xs:decimal"/>
+                <xs:element name="message" type="xs:string"/>
+                <xs:element name="eligible" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="applyForCreditRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="identification" type="xs:string"/>
+                <xs:element name="amount" type="xs:decimal"/>
+                <xs:element name="months" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="applyForCreditResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="totalInstallments" type="xs:int"/>
+                <xs:element name="monthlyInstallment" type="xs:decimal"/>
+                <xs:element name="totalAmount" type="xs:decimal"/>
+                <xs:element name="annualInterestRate" type="xs:decimal"/>
+                <xs:element name="installments" type="tns:creditInstallment" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="loginRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="username" type="xs:string"/>
+                <xs:element name="password" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="loginResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="token" type="xs:string"/>
+                <xs:element name="user" type="tns:user"/>
+                <xs:element name="message" type="xs:string"/>
+                <xs:element name="status" type="tns:responseStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="purchaseRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="identificationNumber" type="xs:string"/>
+                <xs:element name="productId" type="xs:string"/>
+                <xs:element name="purchaseMethod" type="tns:purchaseMethod"/>
+                <xs:element name="months" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="purchaseResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="creditResponse" type="tns:appliedCreditResponse"/>
+                <xs:element name="message" type="xs:string" minOccurs="0"/>
+                <xs:element name="status" type="tns:responseStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getProductsRequest">
+        <xs:complexType>
+            <xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getProductsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="products" type="tns:product" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Complex Types -->
+
+    <xs:complexType name="appliedCreditResponse">
+        <xs:sequence>
+            <xs:element name="totalInstallments" type="xs:int"/>
+            <xs:element name="monthlyInstallment" type="xs:decimal"/>
+            <xs:element name="totalAmount" type="xs:decimal"/>
+            <xs:element name="annualInterestRate" type="xs:decimal"/>
+            <xs:element name="installments" type="tns:creditInstallment" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="product">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="price" type="xs:decimal"/>
+            <xs:element name="createdAt" type="xs:dateTime"/>
+            <xs:element name="updatedAt" type="xs:dateTime" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="creditInstallment">
+        <xs:sequence>
+            <xs:element name="number" type="xs:int"/>
+            <xs:element name="amount" type="xs:decimal"/>
+            <xs:element name="interest" type="xs:decimal"/>
+            <xs:element name="capital" type="xs:decimal"/>
+            <xs:element name="balance" type="xs:decimal"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="movement">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string"/>
+            <xs:element name="amount" type="xs:decimal"/>
+            <xs:element name="type" type="tns:movementType"/>
+            <xs:element name="number" type="xs:int"/>
+            <xs:element name="reference" type="xs:string"/>
+            <xs:element name="targetAccount" type="tns:bankAccount"/>
+            <xs:element name="sourceAccount" type="tns:bankAccount" minOccurs="0"/>
+            <xs:element name="sender" type="tns:user"/>
+            <xs:element name="createdAt" type="xs:dateTime"/>
+            <xs:element name="updatedAt" type="xs:dateTime" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="bankAccount">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string"/>
+            <xs:element name="number" type="xs:int"/>
+            <xs:element name="reference" type="xs:string"/>
+            <xs:element name="type" type="tns:bankAccountType"/>
+            <xs:element name="balance" type="xs:decimal"/>
+            <xs:element name="createdAt" type="xs:dateTime"/>
+            <xs:element name="updatedAt" type="xs:dateTime" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="user">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string"/>
+            <xs:element name="username" type="xs:string"/>
+            <xs:element name="identificationNumber" type="xs:string"/>
+            <xs:element name="email" type="xs:string"/>
+            <xs:element name="profile" type="tns:userProfile" minOccurs="0"/>
+            <xs:element name="bankAccounts" type="tns:bankAccount" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="userProfile">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string"/>
+            <xs:element name="firstName" type="xs:string" minOccurs="0"/>
+            <xs:element name="lastName" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Simple Types -->
+
+    <xs:simpleType name="purchaseMethod">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CASH"/>
+            <xs:enumeration value="CREDIT"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="movementType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="DEPOSIT"/>
+            <xs:enumeration value="WITHDRAW"/>
+            <xs:enumeration value="TRANSFER"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="bankAccountType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SAVINGS"/>
+            <xs:enumeration value="CHECKING"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="identificationType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="PASSPORT"/>
+            <xs:enumeration value="ID_CARD"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="responseStatus">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SUCCESS"/>
+            <xs:enumeration value="ERROR"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.29.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1734161503040-1" author="Andres">
+        <createTable tableName="bank_accounts">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_bank_accounts"/>
+            </column>
+            <column name="number" type="SERIAL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reference" type="VARCHAR(255)"/>
+            <column name="type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="balance" type="NUMERIC(10, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME"/>
+            <column name="updated_at" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1734161503040-2" author="Andres">
+        <createTable tableName="credits">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_credits"/>
+            </column>
+            <column name="user_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="NUMERIC(10, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="total_installments" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="interest_rate" type="NUMERIC(4, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="installment_amount" type="NUMERIC(10, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="paid" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME"/>
+            <column name="updated_at" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1734161503040-3" author="Andres">
+        <createTable tableName="movements">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_movements"/>
+            </column>
+            <column name="type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="NUMERIC(10, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="number" type="SERIAL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reference" type="VARCHAR(255)"/>
+            <column name="source_bank_account_id" type="UUID"/>
+            <column name="target_bank_account_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sender_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME"/>
+            <column name="updated_at" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1734161503040-4" author="Andres">
+        <createTable tableName="permissions">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_permissions"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="created_at" type="DATETIME"/>
+            <column name="updated_at" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1734161503040-5" author="Andres">
+        <createTable tableName="products">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_products"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="NUMERIC(10, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <!-- CORRECCIÓN: Se añade la columna image que faltaba y que el sistema busca en Java -->
+            <column name="image" type="VARCHAR(255)"/>
+            <column name="created_at" type="DATETIME"/>
+            <column name="updated_at" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1734161503040-6" author="Andres">
+        <createTable tableName="role_permission">
+            <column name="permission_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_role_permission"/>
+            </column>
+            <column name="role_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_role_permission"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1734161503040-7" author="Andres">
+        <createTable tableName="roles">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_roles"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="created_at" type="DATETIME"/>
+            <column name="updated_at" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1734161503040-8" author="Andres">
+        <createTable tableName="sales">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_sales"/>
+            </column>
+            <column name="product_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="DECIMAL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="purchase_method" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME"/>
+            <column name="updated_at" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1734161503040-9" author="Andres">
+        <createTable tableName="user_profiles">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user_profiles"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="identification_type" type="VARCHAR(255)"/>
+            <column name="identification_number" type="VARCHAR(255)"/>
+            <column name="address" type="VARCHAR(255)"/>
+            <column name="phone_number" type="VARCHAR(255)"/>
+            <column name="birth_date" type="DATE"/>
+            <column name="image" type="VARCHAR(255)"/>
+            <column name="user_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME"/>
+            <column name="updated_at" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1734161503040-10" author="Andres">
+        <createTable tableName="users">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_users"/>
+            </column>
+            <column name="identification_number" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME"/>
+            <column name="updated_at" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1734161503040-11" author="Andres">
+        <addUniqueConstraint columnNames="number" constraintName="uc_bank_accounts_number" tableName="bank_accounts"/>
+    </changeSet>
+    <changeSet id="1734161503040-12" author="Andres">
+        <addUniqueConstraint columnNames="reference" constraintName="uc_bank_accounts_reference"
+                             tableName="bank_accounts"/>
+    </changeSet>
+    <changeSet id="1734161503040-13" author="Andres">
+        <addUniqueConstraint columnNames="user_id, type" constraintName="uc_bank_accounts_user_id_type"
+                             tableName="bank_accounts"/>
+    </changeSet>
+    <changeSet id="1734161503040-14" author="Andres">
+        <addUniqueConstraint columnNames="number" constraintName="uc_movements_number" tableName="movements"/>
+    </changeSet>
+    <changeSet id="1734161503040-15" author="Andres">
+        <addUniqueConstraint columnNames="reference" constraintName="uc_movements_reference" tableName="movements"/>
+    </changeSet>
+    <changeSet id="1734161503040-16" author="Andres">
+        <addUniqueConstraint columnNames="user_id" constraintName="uc_user_profiles_user" tableName="user_profiles"/>
+    </changeSet>
+    <changeSet id="1734161503040-17" author="Andres">
+        <addUniqueConstraint columnNames="email" constraintName="uc_users_email" tableName="users"/>
+    </changeSet>
+    <changeSet id="1734161503040-18" author="Andres">
+        <addUniqueConstraint columnNames="identification_number" constraintName="uc_users_identificationnumber"
+                             tableName="users"/>
+    </changeSet>
+    <changeSet id="1734161503040-19" author="Andres">
+        <addUniqueConstraint columnNames="username" constraintName="uc_users_username" tableName="users"/>
+    </changeSet>
+    <changeSet id="1734161503040-20" author="Andres">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="bank_accounts"
+                                   constraintName="FK_BANK_ACCOUNTS_ON_USER" referencedColumnNames="id"
+                                   referencedTableName="users"/>
+    </changeSet>
+    <changeSet id="1734161503040-21" author="Andres">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="credits" constraintName="FK_CREDITS_ON_USER"
+                                   referencedColumnNames="id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet id="1734161503040-22" author="Andres">
+        <addForeignKeyConstraint baseColumnNames="sender_id" baseTableName="movements"
+                                   constraintName="FK_MOVEMENTS_ON_SENDER" referencedColumnNames="id"
+                                   referencedTableName="users"/>
+    </changeSet>
+    <changeSet id="1734161503040-23" author="Andres">
+        <addForeignKeyConstraint baseColumnNames="source_bank_account_id" baseTableName="movements"
+                                   constraintName="FK_MOVEMENTS_ON_SOURCE_BANK_ACCOUNT" referencedColumnNames="id"
+                                   referencedTableName="bank_accounts"/>
+    </changeSet>
+    <changeSet id="1734161503040-24" author="Andres">
+        <addForeignKeyConstraint baseColumnNames="target_bank_account_id" baseTableName="movements"
+                                   constraintName="FK_MOVEMENTS_ON_TARGET_BANK_ACCOUNT" referencedColumnNames="id"
+                                   referencedTableName="bank_accounts"/>
+    </changeSet>
+    <changeSet id="1734161503040-25" author="Andres">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="sales" constraintName="FK_SALES_ON_PRODUCT"
+                                   referencedColumnNames="id" referencedTableName="products"/>
+    </changeSet>
+    <changeSet id="1734161503040-26" author="Andres">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="sales" constraintName="FK_SALES_ON_USER"
+                                   referencedColumnNames="id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet id="1734161503040-27" author="Andres">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="users" constraintName="FK_USERS_ON_ROLE"
+                                   referencedColumnNames="id" referencedTableName="roles"/>
+    </changeSet>
+    <changeSet id="1734161503040-28" author="Andres">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_profiles"
+                                   constraintName="FK_USER_PROFILES_ON_USER" referencedColumnNames="id"
+                                   referencedTableName="users"/>
+    </changeSet>
+    <changeSet id="1734161503040-29" author="Andres">
+        <addForeignKeyConstraint baseColumnNames="permission_id" baseTableName="role_permission"
+                                   constraintName="fk_rolper_on_permission" referencedColumnNames="id"
+                                   referencedTableName="permissions"/>
+    </changeSet>
+    <changeSet id="1734161503040-30" author="Andres">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="role_permission"
+                                   constraintName="fk_rolper_on_role" referencedColumnNames="id"
+                                   referencedTableName="roles"/>
+    </changeSet>
+
+</databaseChangeLog>
