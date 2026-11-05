@@ -12,7 +12,8 @@ using WS_EurekaBank_Donet_GR8.db;
 using WS_EurekaBank_Donet_GR8.webservicio;
 
 // Servidor SOAP del banco: CoreWCF sobre Kestrel (se inicia con "dotnet run").
-// Puertos: http 8090 y https 44390 (ver appsettings.json y Properties/launchSettings.json).
+// Puertos: http 8090 en todas las interfaces (accesible desde la red local) y https 44390 solo en
+// localhost (ver appsettings.json y Properties/launchSettings.json).
 const string RutaServicio = "/WS_EurekaBank_Donet_GR8/webservicio/WSEureka.svc";
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
