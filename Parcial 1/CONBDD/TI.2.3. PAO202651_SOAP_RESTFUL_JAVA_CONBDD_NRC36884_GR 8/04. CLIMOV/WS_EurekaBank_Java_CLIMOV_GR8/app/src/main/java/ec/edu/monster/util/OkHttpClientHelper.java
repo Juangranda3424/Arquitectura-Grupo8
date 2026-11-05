@@ -12,7 +12,7 @@ public class OkHttpClientHelper {
     public static OkHttpClient createUnsafeOkHttpClient() {
         // Crear OkHttpClient con configuración personalizada
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.connectTimeout(30, TimeUnit.SECONDS)
+        builder.connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS);
 

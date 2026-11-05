@@ -1,6 +1,7 @@
 package ec.edu.monster.climov.service;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import ec.edu.monster.climov.model.LoginRequest;
 import ec.edu.monster.climov.model.LoginResponse;
@@ -26,7 +27,7 @@ public class LoginService {
         this.gson = new Gson();
     }
 
-    public boolean auth(String username, String password) {
+    public boolean auth(String username, String password) throws IOException {
         try {
             LoginRequest request = new LoginRequest(username, password);
             String json = gson.toJson(request);
@@ -43,10 +44,13 @@ public class LoginService {
                     LoginResponse loginResponse = gson.fromJson(responseBody, LoginResponse.class);
                     return loginResponse != null && loginResponse.isSuccess();
                 }
+                if (response.code() == 401) {
+                    return false; // credenciales invalidas
+                }
+                throw new IOException("Respuesta inesperada del servidor (HTTP " + response.code() + ")");
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (JsonSyntaxException e) {
+            throw new IOException("Respuesta invalida del servidor", e);
         }
-        return false;
     }
 }

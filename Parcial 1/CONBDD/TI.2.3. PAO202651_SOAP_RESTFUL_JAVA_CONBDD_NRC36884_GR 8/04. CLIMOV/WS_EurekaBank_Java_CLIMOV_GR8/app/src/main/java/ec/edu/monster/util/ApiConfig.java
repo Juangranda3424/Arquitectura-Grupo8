@@ -12,7 +12,7 @@ public class ApiConfig {
     // Para obtener tu IP en Windows: ipconfig (buscar IPv4)
     // Para obtener tu IP en Linux/Mac: ifconfig o ip addr
     // Ambos dispositivos (PC y celular) deben estar en la misma red WiFi
-    private static final String PC_IP = "10.95.194.5"; // CAMBIAR POR TU IP LOCAL
+    private static final String PC_IP = "10.40.73.239"; // CAMBIAR POR TU IP LOCAL
     
     private static final String SERVER_PORT = "8080";
     private static final String SERVER_CONTEXT = "WS_EurekaBank_Java_GR8/resources/";
@@ -38,15 +38,18 @@ public class ApiConfig {
      * Detecta si la aplicación está corriendo en un emulador
      * @return true si es emulador, false si es dispositivo físico
      */
-    private static boolean isEmulator() {
+    public static boolean isEmulator() {
         return Build.FINGERPRINT.startsWith("generic")
+                || Build.FINGERPRINT.contains("sdk_gphone")
+                || Build.HARDWARE.contains("ranchu")
+                || Build.HARDWARE.contains("goldfish")
                 || Build.FINGERPRINT.startsWith("unknown")
                 || Build.MODEL.contains("google_sdk")
                 || Build.MODEL.contains("Emulator")
                 || Build.MODEL.contains("Android SDK built for x86")
                 || Build.MANUFACTURER.contains("Genymotion")
                 || (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic"))
-                || "google_sdk".equals(Build.PRODUCT);
+                || Build.PRODUCT.contains("sdk");
     }
     
     // Endpoints
