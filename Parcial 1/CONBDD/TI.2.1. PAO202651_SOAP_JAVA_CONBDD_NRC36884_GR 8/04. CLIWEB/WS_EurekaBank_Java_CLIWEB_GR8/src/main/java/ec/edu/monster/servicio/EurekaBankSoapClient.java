@@ -1,5 +1,6 @@
 package ec.edu.monster.servicio;
 
+import ec.edu.monster.config.ServidorConfig;
 import ec.edu.monster.model.CuentaModel;
 import ec.edu.monster.model.MovimientoModel;
 import ec.edu.monster.model.TipoMovimiento;
@@ -17,8 +18,8 @@ import java.util.List;
  * Puente entre el cliente web y los servicios SOAP del servidor TI.2.1
  * (04. SERVIDOR/WS_EurekaBank_Java_GR8).
  *
- * Los stubs JAX-WS viven en {@code ec.edu.monster.ws} y ya traen la ubicación del
- * WSDL del servidor; aquí solo se usan los ports y se adaptan las respuestas a los
+ * Los stubs JAX-WS viven en {@code ec.edu.monster.ws} y se construyen con la ubicación del
+ * WSDL configurada (ServidorConfig); aquí solo se usan los ports y se adaptan las respuestas a los
  * modelos que consumen las JSP.
  *
  * Los ports se crean una sola vez (la creación implica leer el WSDL por HTTP) y se
@@ -26,8 +27,8 @@ import java.util.List;
  */
 public class EurekaBankSoapClient {
 
-    /** URL base del servidor SOAP; coincide con el wsdlLocation de los stubs de ws/. */
-    public static final String URL_SERVIDOR = "http://localhost:8080/WS_EurekaBank_Java_GR8";
+    /** URL base del servidor SOAP; se lee de ServidorConfig (config.properties). */
+    public static final String URL_SERVIDOR = ServidorConfig.url();
 
     /** El esquema del servidor no expone el valor de la fecha de creación. */
     private static final String FECHA_NO_DISPONIBLE = "No disponible";
@@ -133,7 +134,7 @@ public class EurekaBankSoapClient {
             synchronized (EurekaBankSoapClient.class) {
                 puerto = puertoLogin;
                 if (puerto == null) {
-                    puerto = new WSLogin_Service().getWSLoginPort();
+                    puerto = new WSLogin_Service(ServidorConfig.wsdl("WSLogin")).getWSLoginPort();
                     puertoLogin = puerto;
                 }
             }
@@ -147,7 +148,7 @@ public class EurekaBankSoapClient {
             synchronized (EurekaBankSoapClient.class) {
                 puerto = puertoCuenta;
                 if (puerto == null) {
-                    puerto = new WSCuenta_Service().getWSCuentaPort();
+                    puerto = new WSCuenta_Service(ServidorConfig.wsdl("WSCuenta")).getWSCuentaPort();
                     puertoCuenta = puerto;
                 }
             }
@@ -161,7 +162,7 @@ public class EurekaBankSoapClient {
             synchronized (EurekaBankSoapClient.class) {
                 puerto = puertoMovimiento;
                 if (puerto == null) {
-                    puerto = new WSMovimiento_Service().getWSMovimientoPort();
+                    puerto = new WSMovimiento_Service(ServidorConfig.wsdl("WSMovimiento")).getWSMovimientoPort();
                     puertoMovimiento = puerto;
                 }
             }

@@ -4,6 +4,7 @@
  */
 package ec.edu.monster.service;
 
+import ec.edu.monster.config.ServidorConfig;
 import ec.edu.monster.model.MovimientoModel;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
@@ -18,7 +19,7 @@ import org.glassfish.jersey.jsonb.JsonBindingFeature;
  * @author crist
  */
 public class MovimientoService {
-    private static final String BASE_URL = "http://localhost:8080/WS_EurekaBank_Java_GR8/resources";
+    private static final String BASE_URL = ServidorConfig.url();
     private Client client;
 
     public MovimientoService() {

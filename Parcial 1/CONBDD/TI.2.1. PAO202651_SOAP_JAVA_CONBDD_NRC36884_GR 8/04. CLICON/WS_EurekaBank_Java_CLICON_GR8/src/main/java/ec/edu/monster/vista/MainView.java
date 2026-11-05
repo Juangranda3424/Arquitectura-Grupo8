@@ -1,5 +1,6 @@
 package ec.edu.monster.vista;
 
+import ec.edu.monster.config.ServidorConfig;
 import ec.edu.monster.controlador.MainController;
 
 import java.util.Scanner;
@@ -13,7 +14,7 @@ import java.util.Scanner;
  */
 public class MainView {
 
-    private static final String ENDPOINT = "http://localhost:8080/WS_EurekaBank_Java_GR8/";
+    private static final String ENDPOINT = ServidorConfig.url();
 
     private static Scanner scanner = new Scanner(System.in);
     private static MainController mainController = new MainController();

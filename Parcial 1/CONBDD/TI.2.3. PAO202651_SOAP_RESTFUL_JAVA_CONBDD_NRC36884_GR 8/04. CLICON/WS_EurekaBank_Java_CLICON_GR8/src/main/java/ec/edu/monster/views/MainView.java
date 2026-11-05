@@ -1,5 +1,6 @@
 package ec.edu.monster.views;
 
+import ec.edu.monster.config.ServidorConfig;
 import ec.edu.monster.controller.MainController;
 import ec.edu.monster.util.Consola;
 
@@ -18,7 +19,7 @@ public class MainView {
     public static void main(String[] args) {
         System.out.println();
         System.out.println(Consola.banner());
-        System.out.println(Consola.atenuado("Servicio RESTful: " + "http://localhost:8080/WS_EurekaBank_Java_GR8/resources"));
+        System.out.println(Consola.atenuado("Servicio RESTful: " + ServidorConfig.url()));
         System.out.println();
 
         while (true) {
