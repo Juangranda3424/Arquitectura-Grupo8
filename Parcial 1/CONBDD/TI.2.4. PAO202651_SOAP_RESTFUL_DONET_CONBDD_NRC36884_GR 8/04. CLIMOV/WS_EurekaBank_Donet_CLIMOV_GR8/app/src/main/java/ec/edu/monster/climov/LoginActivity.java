@@ -3,6 +3,7 @@ package ec.edu.monster.climov;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import ec.edu.monster.climov.service.LoginService;
+import ec.edu.monster.climov.util.ApiConfig;
+
+import java.io.IOException;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -59,7 +63,12 @@ public class LoginActivity extends AppCompatActivity {
             String username = params[0];
             String password = params[1];
 
-            return loginService.auth(username, password);
+            try {
+                return loginService.auth(username, password);
+            } catch (IOException e) {
+                Log.e("LoginActivity", "No se pudo conectar con el servidor", e);
+                return null; // null = fallo de conexion (no son credenciales incorrectas)
+            }
         }
 
         @Override
@@ -67,7 +76,9 @@ public class LoginActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
             btnLogin.setEnabled(true);
 
-            if (success) {
+            if (success == null) {
+                Toast.makeText(LoginActivity.this, "No se pudo conectar con el servidor en " + ApiConfig.BASE_URL + ". Verifique que el servidor este activo.", Toast.LENGTH_LONG).show();
+            } else if (success) {
                 Toast.makeText(LoginActivity.this, "Login exitoso", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.putExtra("username", etUsername.getText().toString());

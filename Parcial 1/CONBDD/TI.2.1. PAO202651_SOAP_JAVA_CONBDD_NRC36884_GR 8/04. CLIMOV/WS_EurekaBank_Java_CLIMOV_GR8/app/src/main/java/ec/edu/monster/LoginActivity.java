@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import ec.edu.monster.service.LoginService;
+import ec.edu.monster.util.SoapHelper;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -49,6 +50,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private class LoginTask extends AsyncTask<String, Void, Boolean> {
+        // Set when the server could not be reached; null means the server answered.
+        private String connectionError;
+
         @Override
         protected void onPreExecute() {
             progressBar.setVisibility(View.VISIBLE);
@@ -60,7 +64,12 @@ public class LoginActivity extends AppCompatActivity {
             String username = params[0];
             String password = params[1];
 
-            return loginService.auth(username, password);
+            try {
+                return loginService.auth(username, password);
+            } catch (Exception e) {
+                connectionError = e.getMessage();
+                return false;
+            }
         }
 
         @Override
@@ -68,7 +77,12 @@ public class LoginActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
             btnLogin.setEnabled(true);
 
-            if (success) {
+            if (connectionError != null) {
+                Toast.makeText(LoginActivity.this,
+                        "No se pudo conectar con el servidor en " + SoapHelper.getBaseUrl()
+                                + ". Verifique que esté en ejecución y en la misma red.",
+                        Toast.LENGTH_LONG).show();
+            } else if (success) {
                 Toast.makeText(LoginActivity.this, "Login exitoso", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.putExtra("username", etUsername.getText().toString());

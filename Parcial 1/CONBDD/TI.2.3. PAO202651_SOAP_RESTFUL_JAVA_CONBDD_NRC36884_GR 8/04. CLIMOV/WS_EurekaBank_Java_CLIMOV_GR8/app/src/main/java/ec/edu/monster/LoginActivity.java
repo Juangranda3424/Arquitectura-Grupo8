@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Mostrar información de conexión en logs
         Log.d(TAG, "URL del servidor: " + ApiConfig.getCurrentBaseUrl());
-        Log.d(TAG, "Dispositivo: " + (isEmulator() ? "Emulador" : "Dispositivo físico"));
+        Log.d(TAG, "Dispositivo: " + (ApiConfig.isEmulator() ? "Emulador" : "Dispositivo físico"));
 
         btnLogin.setOnClickListener(v -> {
             String username = etUsername.getText().toString().trim();

@@ -14,7 +14,7 @@ public class OkHttpClientHelper {
      */
     public static OkHttpClient createHttpClient() {
         return new OkHttpClient.Builder()
-                .connectTimeout(30, TimeUnit.SECONDS)
+                .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
                 .build();
