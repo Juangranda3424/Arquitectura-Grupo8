@@ -70,13 +70,20 @@ namespace WS_EurekaBank_Donet_CLICON_GR8.ec.edu.monster.view
             string password = LeerPassword();
 
             Console.WriteLine();
-            if (mainController.IniciarSesion(username, password))
+            try
             {
-                ConsoleTheme.Exito("Bienvenido, " + username);
+                if (mainController.IniciarSesion(username, password))
+                {
+                    ConsoleTheme.Exito("Bienvenido, " + username);
+                }
+                else
+                {
+                    ConsoleTheme.Aviso("Credenciales incorrectas. Intente nuevamente.");
+                }
             }
-            else
+            catch (InvalidOperationException ex)
             {
-                ConsoleTheme.Aviso("Credenciales incorrectas. Intente nuevamente.");
+                ConsoleTheme.Aviso(ex.Message);
             }
             ConsoleTheme.Esperar();
         }

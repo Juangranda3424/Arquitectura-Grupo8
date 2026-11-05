@@ -150,7 +150,13 @@ public class LoginView extends JFrame {
                 return;
             }
             mensaje.limpiar();
-            boolean ok = mainController.iniciarSesion(username, passwordString);
+            boolean ok;
+            try {
+                ok = mainController.iniciarSesion(username, passwordString);
+            } catch (RuntimeException ex) {
+                mensaje.error("No se pudo conectar con el servidor SOAP. Verifique que esté en ejecución.");
+                return;
+            }
             if (ok) {
                 usuarioActual = username;
                 this.setVisible(false);

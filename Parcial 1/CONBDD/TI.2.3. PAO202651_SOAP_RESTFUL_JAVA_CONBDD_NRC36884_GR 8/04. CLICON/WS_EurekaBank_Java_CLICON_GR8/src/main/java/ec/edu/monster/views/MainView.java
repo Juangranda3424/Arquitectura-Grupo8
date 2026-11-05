@@ -55,10 +55,14 @@ public class MainView {
         System.out.print(Consola.etiqueta("Contraseña: "));
         String password = SCANNER.nextLine();
 
-        if (CONTROLADOR.iniciarSesion(username, password)) {
-            System.out.println(Consola.exito("Inicio de sesión exitoso."));
-        } else {
-            System.out.println(Consola.error("Credenciales incorrectas. Intente nuevamente."));
+        try {
+            if (CONTROLADOR.iniciarSesion(username, password)) {
+                System.out.println(Consola.exito("Inicio de sesión exitoso."));
+            } else {
+                System.out.println(Consola.error("Credenciales incorrectas. Intente nuevamente."));
+            }
+        } catch (IllegalStateException ex) {
+            System.out.println(Consola.error(ex.getMessage()));
         }
     }
 

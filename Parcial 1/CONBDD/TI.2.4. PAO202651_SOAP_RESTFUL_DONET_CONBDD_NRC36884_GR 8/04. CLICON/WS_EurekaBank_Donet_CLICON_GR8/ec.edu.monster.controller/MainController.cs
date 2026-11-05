@@ -89,8 +89,9 @@ namespace WS_EurekaBank_Donet_CLICON_GR8.ec.edu.monster.controller
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine("Error en la autenticación: " + ex.Message);
-                Console.Error.WriteLine("Detalles: " + ex.InnerException?.Message);
+                // Fallo de conexión: no es lo mismo que credenciales rechazadas
+                throw new InvalidOperationException("No se pudo conectar con el servidor REST en " + apiBaseUrl
+                    + ". Verifique que esté en ejecución.", ex);
             }
             return false;
         }
