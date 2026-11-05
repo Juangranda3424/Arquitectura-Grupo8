@@ -1,8 +1,8 @@
-using ec.edu.monster.db;
-using ec.edu.monster.model;
+using WS_EurekaBank_Donet_GR8.db;
+using WS_EurekaBank_Donet_GR8.model;
 using Microsoft.Data.SqlClient;
 
-namespace ec.edu.monster.dao;
+namespace WS_EurekaBank_Donet_GR8.dao;
 
 public class CuentaDAO
 {

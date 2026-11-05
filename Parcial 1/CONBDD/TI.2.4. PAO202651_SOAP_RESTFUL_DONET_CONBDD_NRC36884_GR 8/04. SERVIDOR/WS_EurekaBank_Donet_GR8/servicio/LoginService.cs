@@ -1,4 +1,4 @@
-namespace ec.edu.monster.servicio;
+namespace WS_EurekaBank_Donet_GR8.servicio;
 
 public class LoginService
 {

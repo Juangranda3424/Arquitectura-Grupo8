@@ -1,7 +1,7 @@
-using ec.edu.monster.dao;
-using ec.edu.monster.model;
+using WS_EurekaBank_Donet_GR8.dao;
+using WS_EurekaBank_Donet_GR8.model;
 
-namespace ec.edu.monster.servicio;
+namespace WS_EurekaBank_Donet_GR8.servicio;
 
 public class MovimientoService
 {
