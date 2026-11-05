@@ -39,7 +39,14 @@ public class LoginController {
     }
 
     public void autenticar(String username, String password) {
-        if (iniciarSesion(username, password)) {
+        boolean ok;
+        try {
+            ok = iniciarSesion(username, password);
+        } catch (IllegalStateException ex) {
+            loginView.getMessageLabel().setText("No se pudo conectar con el servidor REST. Verifique que esté en ejecución.");
+            return;
+        }
+        if (ok) {
             loginView.dispose();
              MenuView menu = new MenuView();
             menu.setLocationRelativeTo(null);

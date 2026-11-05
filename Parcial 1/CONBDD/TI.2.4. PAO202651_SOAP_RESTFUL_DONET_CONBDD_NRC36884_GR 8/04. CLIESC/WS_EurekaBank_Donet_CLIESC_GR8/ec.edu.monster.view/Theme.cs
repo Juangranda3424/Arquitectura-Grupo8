@@ -132,7 +132,7 @@ namespace WS_EurekaBank_Donet_CLIESC_GR8.ec.edu.monster.view
         public LogoControl()
         {
             SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint |
-                     ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw, true);
+                     ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw | ControlStyles.SupportsTransparentBackColor, true);
             Size = new Size(44, 44);
             BackColor = System.Drawing.Color.Transparent;
         }

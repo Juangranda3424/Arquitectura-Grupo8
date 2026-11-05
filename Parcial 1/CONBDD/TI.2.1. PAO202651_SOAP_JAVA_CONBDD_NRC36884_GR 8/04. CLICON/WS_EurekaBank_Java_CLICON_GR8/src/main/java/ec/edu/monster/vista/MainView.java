@@ -1,5 +1,6 @@
 package ec.edu.monster.vista;
 
+import ec.edu.monster.config.ServidorConfig;
 import ec.edu.monster.controlador.MainController;
 
 import java.util.Scanner;
@@ -13,7 +14,7 @@ import java.util.Scanner;
  */
 public class MainView {
 
-    private static final String ENDPOINT = "http://localhost:8080/WS_EurekaBank_Java_GR8/";
+    private static final String ENDPOINT = ServidorConfig.url();
 
     private static Scanner scanner = new Scanner(System.in);
     private static MainController mainController = new MainController();
@@ -55,10 +56,15 @@ public class MainView {
         System.out.print(" Contraseña  : ");
         String password = scanner.nextLine();
 
-        if (mainController.iniciarSesion(username, password)) {
-            System.out.println(Consola.ok("Inicio de sesión exitoso. Bienvenido, " + username + "."));
-        } else {
-            System.out.println(Consola.error("Credenciales incorrectas. Intente nuevamente."));
+        try {
+            if (mainController.iniciarSesion(username, password)) {
+                System.out.println(Consola.ok("Inicio de sesión exitoso. Bienvenido, " + username + "."));
+            } else {
+                System.out.println(Consola.error("Credenciales incorrectas. Intente nuevamente."));
+            }
+        } catch (RuntimeException ex) {
+            System.out.println(Consola.error("No se pudo conectar con el servidor SOAP en " + ENDPOINT
+                    + ". Verifique que esté en ejecución."));
         }
     }
 

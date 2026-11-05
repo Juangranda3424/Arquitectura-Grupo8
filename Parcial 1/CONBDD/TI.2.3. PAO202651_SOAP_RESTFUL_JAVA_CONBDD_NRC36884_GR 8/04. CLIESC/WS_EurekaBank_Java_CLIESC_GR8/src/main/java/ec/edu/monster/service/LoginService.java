@@ -1,5 +1,6 @@
 package ec.edu.monster.service;
 
+import jakarta.ws.rs.ProcessingException;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
@@ -69,6 +70,10 @@ public class LoginService {
 
             return false;
 
+        } catch (ProcessingException e) {
+            // Fallo de conexión: no es lo mismo que credenciales rechazadas
+            throw new IllegalStateException("No se pudo conectar con el servidor REST en " + LOGIN_ENDPOINT
+                    + ". Verifique que esté en ejecución.", e);
         } catch (Exception e) {
             System.err.println("Error en autenticación: " + e.getMessage());
             return false;

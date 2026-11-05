@@ -4,6 +4,8 @@
  */
 package ec.edu.monster.service;
 
+import ec.edu.monster.config.ServidorConfig;
+import jakarta.ws.rs.ProcessingException;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
@@ -16,7 +18,7 @@ import org.glassfish.jersey.jsonb.JsonBindingFeature;
  * @author crist
  */
 public class LoginService {
-    private static final String BASE_URL = "http://localhost:8080/WS_EurekaBank_Java_GR8/resources";
+    private static final String BASE_URL = ServidorConfig.url();
     private Client client;
 
     public LoginService() {
@@ -46,6 +48,10 @@ public class LoginService {
                 }
             }
             return false;
+        } catch (ProcessingException e) {
+            // Fallo de conexión: no es lo mismo que credenciales rechazadas
+            throw new IllegalStateException("No se pudo conectar con el servidor REST en " + BASE_URL
+                    + ". Verifique que esté en ejecución.", e);
         } catch (Exception e) {
             System.err.println("Error en autenticación: " + e.getMessage());
             return false;

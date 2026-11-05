@@ -20,6 +20,24 @@ Namespace de los servicios: `http://ws.monster.edu.ec/`.
 No hace falta instalar Payara: el perfil `run` trae **Payara Micro 7.2026.10** como
 `.jar` desde Maven Central y lo levanta con el WAR.
 
+## Configurar la URL del servidor SOAP
+
+La URL base del servidor se define en un solo lugar: la clase `ServidorConfig`, que
+lee la clave `servidor.url`. Para apuntar a otro equipo (otra IP) cambie
+`src/main/resources/config.properties`:
+
+```properties
+servidor.url=http://192.168.1.50:8080/WS_EurekaBank_Java_GR8
+```
+
+Orden de prioridad (gana la primera que exista):
+
+1. Propiedad de JVM `-Dservidor.url=...` (con el perfil `run`:
+   `JAVA_TOOL_OPTIONS=-Dservidor.url=... mvn -Prun exec:exec`)
+2. Archivo `config.properties` en el directorio desde donde se ejecuta Payara Micro
+3. `config.properties` empaquetado en el WAR (`src/main/resources`)
+4. Valor por defecto: `http://localhost:8080/WS_EurekaBank_Java_GR8`
+
 ## Compilar y desplegar
 
 ```bash

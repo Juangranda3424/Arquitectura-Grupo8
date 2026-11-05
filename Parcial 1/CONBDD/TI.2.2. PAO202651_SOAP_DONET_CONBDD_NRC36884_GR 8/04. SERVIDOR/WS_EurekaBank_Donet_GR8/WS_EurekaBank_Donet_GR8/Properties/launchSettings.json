@@ -5,7 +5,7 @@
       "launchBrowser": false,
       "dotnetRunMessages": true,
       "launchUrl": "WS_EurekaBank_Donet_GR8/webservicio/WSEureka.svc?wsdl",
-      "applicationUrl": "http://localhost:8090;https://localhost:44390",
+      "applicationUrl": "http://0.0.0.0:8090;https://localhost:44390",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

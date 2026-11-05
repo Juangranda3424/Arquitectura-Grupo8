@@ -1,5 +1,6 @@
 package ec.edu.monster.views;
 
+import ec.edu.monster.config.ServidorConfig;
 import ec.edu.monster.controller.MainController;
 import ec.edu.monster.util.Consola;
 
@@ -18,7 +19,7 @@ public class MainView {
     public static void main(String[] args) {
         System.out.println();
         System.out.println(Consola.banner());
-        System.out.println(Consola.atenuado("Servicio RESTful: " + "http://localhost:8080/WS_EurekaBank_Java_GR8/resources"));
+        System.out.println(Consola.atenuado("Servicio RESTful: " + ServidorConfig.url()));
         System.out.println();
 
         while (true) {
@@ -55,10 +56,14 @@ public class MainView {
         System.out.print(Consola.etiqueta("Contraseña: "));
         String password = SCANNER.nextLine();
 
-        if (CONTROLADOR.iniciarSesion(username, password)) {
-            System.out.println(Consola.exito("Inicio de sesión exitoso."));
-        } else {
-            System.out.println(Consola.error("Credenciales incorrectas. Intente nuevamente."));
+        try {
+            if (CONTROLADOR.iniciarSesion(username, password)) {
+                System.out.println(Consola.exito("Inicio de sesión exitoso."));
+            } else {
+                System.out.println(Consola.error("Credenciales incorrectas. Intente nuevamente."));
+            }
+        } catch (IllegalStateException ex) {
+            System.out.println(Consola.error(ex.getMessage()));
         }
     }
 
