@@ -1,6 +1,6 @@
 using System;
 
-namespace WS_EurekaBank_Donet_GR8.ec.edu.monster.modelo
+namespace WS_EurekaBank_Donet_GR8.modelo
 {
     /// <summary>
     /// Fila de la tabla cuenta.

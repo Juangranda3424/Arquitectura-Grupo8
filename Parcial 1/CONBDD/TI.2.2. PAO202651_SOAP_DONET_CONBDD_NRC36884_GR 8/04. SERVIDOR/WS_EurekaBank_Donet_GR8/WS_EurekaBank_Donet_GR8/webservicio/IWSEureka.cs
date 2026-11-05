@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using System.ServiceModel;
-using WS_EurekaBank_Donet_GR8.ec.edu.monster.modelo;
+using CoreWCF;
+using WS_EurekaBank_Donet_GR8.modelo;
 
-namespace WS_EurekaBank_Donet_GR8.ec.edu.monster.webservicio
+namespace WS_EurekaBank_Donet_GR8.webservicio
 {
     /// <summary>
     /// Contrato SOAP del banco. El namespace se mantiene igual al del servicio

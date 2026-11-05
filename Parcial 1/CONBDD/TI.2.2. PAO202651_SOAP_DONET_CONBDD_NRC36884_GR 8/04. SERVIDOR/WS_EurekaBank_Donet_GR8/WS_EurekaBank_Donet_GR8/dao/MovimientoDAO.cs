@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using MySql.Data.MySqlClient;
-using WS_EurekaBank_Donet_GR8.ec.edu.monster.db;
-using WS_EurekaBank_Donet_GR8.ec.edu.monster.modelo;
+using WS_EurekaBank_Donet_GR8.db;
+using WS_EurekaBank_Donet_GR8.modelo;
 
-namespace WS_EurekaBank_Donet_GR8.ec.edu.monster.dao
+namespace WS_EurekaBank_Donet_GR8.dao
 {
     /// <summary>
     /// Operaciones sobre las tablas movimiento y tipomovimiento.
