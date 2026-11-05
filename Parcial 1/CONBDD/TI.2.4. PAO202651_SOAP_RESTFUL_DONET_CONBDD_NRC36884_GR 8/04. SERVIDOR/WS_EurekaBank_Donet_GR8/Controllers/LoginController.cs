@@ -8,6 +8,13 @@ namespace WS_EurekaBank_Donet_GR8.Controllers;
 [Route("api/[controller]")]
 public class LoginController : ControllerBase
 {
+    private readonly IConfiguration _configuration;
+
+    public LoginController(IConfiguration configuration)
+    {
+        _configuration = configuration;
+    }
+
     [HttpPost]
     [Consumes("application/json")]
     [Produces("application/json")]
@@ -18,7 +25,7 @@ public class LoginController : ControllerBase
             return BadRequest(new { success = false, message = "Username y Password son requeridos" });
         }
 
-        var service = new LoginService();
+        var service = new LoginService(_configuration);
         bool isValid = service.Login(request.Username, request.Password);
 
         if (isValid)

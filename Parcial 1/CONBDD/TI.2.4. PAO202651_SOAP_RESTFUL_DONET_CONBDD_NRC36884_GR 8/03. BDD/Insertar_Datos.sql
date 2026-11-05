@@ -46,7 +46,7 @@ INSERT INTO dbo.empleado (chr_emplcodigo, vch_emplpaterno, vch_emplmaterno, vch_
 ('9999', 'Internet', 'Internet', 'internet', 'Internet', 'internet'),
 ('0001', 'Romero', 'Castillo', 'Carlos Alberto', 'Trujillo', 'Call1 1 Nro. 456'),
 ('0002', 'Castro', 'Vargas', 'Lidia', 'Lima', 'Federico Villarreal 456 - SMP'),
-('0003', 'Reyes', 'Ortiz', 'Claudia', 'Lima', 'Av. Aviación 3456 - San Borja'),
+('0003', 'Reyes', 'Ortiz', 'Claudia', 'Lima', 'Av. Aviaciï¿½n 3456 - San Borja'),
 ('0004', 'Ramos', 'Garibay', 'Angelica', 'Chiclayo', 'Calle Barcelona 345'),
 ('0005', 'Ruiz', 'Zabaleta', 'Claudia', 'Cusco', 'Calle Cruz Verde 364'),
 ('0006', 'Cruz', 'Tarazona', 'Ricardo', 'Arequipa', 'Calle La Gruta 304'),
@@ -106,7 +106,7 @@ INSERT INTO dbo.asignado (chr_asigcodigo, chr_sucucodigo, chr_emplcodigo, dtt_as
 -- PARAMETRO
 INSERT INTO dbo.parametro (chr_paracodigo, vch_paradescripcion, vch_paravalor, vch_paraestado) VALUES
 ('001','ITF - Impuesto a la Transacciones Financieras','0.08','ACTIVO'),
-('002','Número de Operaciones Sin Costo','15','ACTIVO');
+('002','Nï¿½mero de Operaciones Sin Costo','15','ACTIVO');
 
 -- CLIENTE
 -- CLIENTES
@@ -196,3 +196,7 @@ INSERT INTO dbo.contador (vch_conttabla, int_contitem, int_contlongitud) VALUES
 ('Asignado', 11, 6),
 ('Parametro', 2, 3),
 ('Cliente', 20, 5);
+
+-- CREDENCIALES (contrasena = MD5('MONSTER9'), same as the MySQL databases)
+INSERT INTO dbo.credenciales (usuario, contrasena) VALUES
+('MONSTER', '6c3f6757e773775fd059e2f025bd14ba');
