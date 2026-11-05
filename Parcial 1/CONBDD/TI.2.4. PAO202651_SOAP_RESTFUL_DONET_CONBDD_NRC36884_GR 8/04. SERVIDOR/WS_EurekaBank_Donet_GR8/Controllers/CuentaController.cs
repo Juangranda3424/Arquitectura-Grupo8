@@ -1,6 +1,6 @@
-using ec.edu.monster.dao;
-using ec.edu.monster.model;
-using ec.edu.monster.servicio;
+using WS_EurekaBank_Donet_GR8.dao;
+using WS_EurekaBank_Donet_GR8.model;
+using WS_EurekaBank_Donet_GR8.servicio;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WS_EurekaBank_Donet_GR8.Controllers;

@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace WS_EurekaBank_Donet_GR8.ec.edu.monster.modelo
+namespace WS_EurekaBank_Donet_GR8.modelo
 {
     /// <summary>
     /// Movimiento transportado por el servicio SOAP.

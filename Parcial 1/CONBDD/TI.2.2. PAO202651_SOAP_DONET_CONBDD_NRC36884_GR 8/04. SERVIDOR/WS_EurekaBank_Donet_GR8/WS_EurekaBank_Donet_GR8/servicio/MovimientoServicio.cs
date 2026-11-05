@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using WS_EurekaBank_Donet_GR8.ec.edu.monster.dao;
-using WS_EurekaBank_Donet_GR8.ec.edu.monster.modelo;
+using WS_EurekaBank_Donet_GR8.dao;
+using WS_EurekaBank_Donet_GR8.modelo;
 
-namespace WS_EurekaBank_Donet_GR8.ec.edu.monster.servicio
+namespace WS_EurekaBank_Donet_GR8.servicio
 {
     /// <summary>
     /// Consulta de movimientos de una cuenta.

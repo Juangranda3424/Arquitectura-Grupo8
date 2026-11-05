@@ -5,7 +5,9 @@
 #   docker compose down -v        # stop and wipe all data (next "up" re-seeds)
 #
 # MySQL 8.4  -> localhost:3306  eurekabank_ti21 | eurekabank_ti22 | eurekabank_ti23  (MONSTER / MONSTER9)
-# SQL Server -> localhost,1433  eurekabank_ti24                                     (sa / EurekaGr8.2026)
+# SQL Server -> localhost,1433  eurekabank_ti24                                     (MONSTER / MONSTER9)
+#               sa / EurekaGr8.2026 is kept only as the internal SQL Server admin (SQL Server
+#               rejects MONSTER9 for sa because of its password complexity policy).
 
 name: eurekabank-conbdd
 
@@ -71,7 +73,8 @@ services:
       retries: 15
       start_period: 40s
 
-  # One-shot job: seeds eurekabank_ti24 only when it does not exist yet, then exits.
+  # One-shot job: seeds eurekabank_ti24 only when it does not exist yet, makes sure the
+  # MONSTER / MONSTER9 login exists (also on existing volumes), then exits.
   mssql-init:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: eurekabank-mssql-init
@@ -82,6 +85,7 @@ services:
       SA_PASSWORD: EurekaGr8.2026
     volumes:
       - "./TI.2.4. PAO202651_SOAP_RESTFUL_DONET_CONBDD_NRC36884_GR 8/03. BDD:/scripts:ro"
+      - ./docker/mssql:/grants:ro
     entrypoint:
       - /bin/bash
       - -c
@@ -90,8 +94,9 @@ services:
         if [ "$$($$SQL -h -1 -W -Q "SET NOCOUNT ON; SELECT COUNT(*) FROM sys.databases WHERE name = 'eurekabank_ti24'")" = "1" ]; then
           echo "eurekabank_ti24 already exists, nothing to seed."
         else
-          $$SQL -i /scripts/Crear_Base.sql && $$SQL -i /scripts/Insertar_Datos.sql && echo "eurekabank_ti24 seeded."
+          $$SQL -i /scripts/Crear_Base.sql && $$SQL -i /scripts/Insertar_Datos.sql && echo "eurekabank_ti24 seeded." || exit 1
         fi
+        $$SQL -i /grants/99-login.sql && echo "login MONSTER / MONSTER9 ready."
     mem_limit: 256m
     restart: "no"
 

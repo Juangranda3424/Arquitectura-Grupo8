@@ -1,4 +1,4 @@
-namespace WS_EurekaBank_Donet_GR8.ec.edu.monster.modelo
+namespace WS_EurekaBank_Donet_GR8.modelo
 {
     /// <summary>
     /// Movimiento leido desde las tablas movimiento y tipomovimiento,

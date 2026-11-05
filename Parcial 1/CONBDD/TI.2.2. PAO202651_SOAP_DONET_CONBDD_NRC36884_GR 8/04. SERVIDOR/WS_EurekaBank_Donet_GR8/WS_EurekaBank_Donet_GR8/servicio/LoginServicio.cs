@@ -1,6 +1,6 @@
 using System;
 
-namespace WS_EurekaBank_Donet_GR8.ec.edu.monster.servicio
+namespace WS_EurekaBank_Donet_GR8.servicio
 {
     /// <summary>
     /// Autenticacion de los clientes del banco.

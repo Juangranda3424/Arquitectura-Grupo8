@@ -15,15 +15,20 @@ Servidor REST (ASP.NET Core + SQL Server) del proyecto **TI.2.4 · SOAP_RESTFUL_
 `appsettings.json` → `ConnectionStrings:EurekaBankDB`
 
 ```
-Server=localhost,1433;Database=eurekabank_ti24;User Id=sa;Password=EurekaGr8.2026;TrustServerCertificate=True
+Server=localhost,1433;Database=eurekabank_ti24;User Id=MONSTER;Password=MONSTER9;TrustServerCertificate=True
 ```
 
-Scripts de base de datos (ejecutar con `sqlcmd`, en este orden):
+Con Docker (`Parcial 1/CONBDD/docker-compose.yaml`) la base y el login `MONSTER` / `MONSTER9`
+se crean solos. Sin Docker, ejecutar con `sqlcmd` como administrador (`sa`), en este orden:
 
 ```bash
 sqlcmd -S localhost,1433 -U sa -P 'EurekaGr8.2026' -C -i "03. BDD/Crear_Base.sql"
 sqlcmd -S localhost,1433 -U sa -P 'EurekaGr8.2026' -C -i "03. BDD/Insertar_Datos.sql"
+sqlcmd -S localhost,1433 -U sa -P 'EurekaGr8.2026' -C -i "../docker/mssql/99-login.sql"
 ```
+
+El ultimo script crea el login `MONSTER` / `MONSTER9` (con `CHECK_POLICY = OFF`, porque SQL Server
+no acepta `MONSTER9` con su politica de complejidad) y lo hace `db_owner` de `eurekabank_ti24`.
 
 ## Ejecutar
 

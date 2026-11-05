@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.ServiceModel;
-using System.ServiceModel.Activation;
-using WS_EurekaBank_Donet_GR8.ec.edu.monster.modelo;
-using WS_EurekaBank_Donet_GR8.ec.edu.monster.servicio;
+using CoreWCF;
+using WS_EurekaBank_Donet_GR8.modelo;
+using WS_EurekaBank_Donet_GR8.servicio;
 
-namespace WS_EurekaBank_Donet_GR8.ec.edu.monster.webservicio
+namespace WS_EurekaBank_Donet_GR8.webservicio
 {
-    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class WSEureka : IWSEureka
     {
         private readonly LoginServicio loginServicio = new LoginServicio();

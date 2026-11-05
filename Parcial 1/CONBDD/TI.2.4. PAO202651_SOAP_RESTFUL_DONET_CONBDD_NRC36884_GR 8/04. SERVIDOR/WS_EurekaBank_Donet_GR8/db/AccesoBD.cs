@@ -1,6 +1,6 @@
 using Microsoft.Data.SqlClient;
 
-namespace ec.edu.monster.db;
+namespace WS_EurekaBank_Donet_GR8.db;
 
 public class AccesoBD
 {

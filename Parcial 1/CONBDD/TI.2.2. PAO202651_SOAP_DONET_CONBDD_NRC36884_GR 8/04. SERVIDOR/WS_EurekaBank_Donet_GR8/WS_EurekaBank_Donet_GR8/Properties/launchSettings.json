@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "WS_EurekaBank_Donet_GR8": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      "dotnetRunMessages": true,
+      "launchUrl": "WS_EurekaBank_Donet_GR8/webservicio/WSEureka.svc?wsdl",
+      "applicationUrl": "http://localhost:8090;https://localhost:44390",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

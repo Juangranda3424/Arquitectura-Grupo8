@@ -90,7 +90,7 @@ Parcial 1/
 | Contenedor | Puerto | Bases | Usuario |
 |---|---|---|---|
 | MySQL 8.4 | 3306 | `eurekabank_ti21`, `eurekabank_ti22`, `eurekabank_ti23` | `MONSTER` / `MONSTER9` |
-| SQL Server 2022 Express | 1433 | `eurekabank_ti24` | `sa` / `EurekaGr8.2026` |
+| SQL Server 2022 Express | 1433 | `eurekabank_ti24` | `MONSTER` / `MONSTER9` (`sa` / `EurekaGr8.2026` solo como administrador interno) |
 
 ```bash
 cd "Parcial 1/CONBDD"
